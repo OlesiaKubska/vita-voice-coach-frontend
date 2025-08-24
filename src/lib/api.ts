@@ -1,0 +1,17 @@
+import axios from "axios";
+import { StrapiResponse, Post, Service } from "./types";
+
+const API_URL = "http://localhost:1337/api";
+
+// Posts
+export async function getPosts(): Promise<Post[]> {
+  const res = await axios.get<StrapiResponse<Post>>(`${API_URL}/posts?populate=*`);
+
+  return res.data.data;
+}
+
+// Services
+export async function getServices(): Promise<Service[]> {
+  const res = await axios.get<StrapiResponse<Service>>(`${API_URL}/services`);
+  return res.data.data;
+}

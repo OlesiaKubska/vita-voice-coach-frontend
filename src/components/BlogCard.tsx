@@ -1,17 +1,22 @@
-interface Props {
+"use client";
+
+import Link from "next/link";
+
+interface BlogCardProps {
   title: string;
   excerpt: string;
   slug: string;
 }
 
-import Link from "next/link";
-
-export default function BlogCard({ title, excerpt, slug }: Props) {
+export default function BlogCard({ title, excerpt, slug }: BlogCardProps) {
   return (
-    <div className="p-6 border rounded-lg shadow-md bg-white hover:shadow-xl transition">
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+    <div className="border rounded-lg p-6 shadow-sm hover:shadow-lg transition bg-white">
+      <h2 className="text-2xl font-semibold mb-3">{title}</h2>
       <p className="text-gray-600 mb-4">{excerpt}</p>
-      <Link href={`/blog/${slug}`} className="text-purple-600 font-medium">
+      <Link
+        href={`/blog/${slug}`}
+        className="text-indigo-600 font-medium hover:underline"
+      >
         Czytaj więcej →
       </Link>
     </div>

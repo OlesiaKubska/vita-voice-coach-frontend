@@ -1,13 +1,15 @@
-interface Props {
+"use client";
+
+interface ServiceCardProps {
   title: string;
   description: string;
 }
 
-export default function ServiceCard({ title, description }: Props) {
+export default function ServiceCard({ title, description }: ServiceCardProps) {
   return (
-    <div className="p-6 border rounded-lg shadow-md bg-white hover:shadow-xl transition">
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
+    <div className="border rounded-lg p-6 shadow-md hover:shadow-xl transition bg-gradient-to-br from-indigo-50 to-white">
+      <h2 className="text-xl font-bold mb-2">{title}</h2>
+      <p className="text-gray-700">{description}</p>
     </div>
   );
 }
