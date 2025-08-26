@@ -1,5 +1,3 @@
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
 import { getPosts } from "../../../lib/api";
 import Image from "next/image";
 import { Post } from "../../../lib/types";
@@ -22,7 +20,6 @@ export default async function BlogPostPage(props: {
 
   return (
     <>
-      <Navbar />
       <main className="max-w-3xl mx-auto py-20 px-4">
         <h1 className="text-4xl font-bold mb-6">{post.title}</h1>
 
@@ -40,7 +37,6 @@ export default async function BlogPostPage(props: {
           <div dangerouslySetInnerHTML={{ __html: post.content }} />
         </article>
       </main>
-      <Footer />
     </>
   );
 }
