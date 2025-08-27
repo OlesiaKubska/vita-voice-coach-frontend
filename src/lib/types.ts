@@ -20,9 +20,7 @@ export interface Post {
   id: number;
   attributes: PostAttributes;
   slug: string;
-  coverImage?: {
-        url: string;
-      };
+  coverImage?: { url: string } | string; 
   title: string;
   content: string;
 }
