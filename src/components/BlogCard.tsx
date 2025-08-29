@@ -11,16 +11,16 @@ interface BlogCardProps {
 export default function BlogCard({ title, excerpt, slug }: BlogCardProps) {
   return (
     <div className="relative group">
-      {/* фонова хвиля */}
-      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 animate-pulse"></div>
+      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-(--brand-green) via-(--brand-sage) to-(--brand-red)/60 animate-pulse"></div>
 
-      {/* сама картка */}
-      <div className="relative border rounded-lg p-6 shadow-md bg-white/80 backdrop-blur-sm hover:shadow-2xl hover:-translate-y-1 transition transform">
-        <h2 className="text-2xl font-semibold mb-3">{title}</h2>
-        <p className="text-gray-600 mb-4">{excerpt}</p>
+      <div className="relative border border-(--brand-sage)/30 rounded-lg p-6 shadow-md bg-white/80 backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition transform">
+        <h2 className="text-2xl font-semibold mb-3 text-(--brand-green)">
+          {title}
+        </h2>
+        <p className="text-(--brand-sage) mb-4">{excerpt}</p>
         <Link
           href={`/blog/${slug}`}
-          className="text-indigo-600 font-medium hover:underline"
+          className="text-(--brand-red) font-medium hover:underline"
         >
           Czytaj więcej →
         </Link>

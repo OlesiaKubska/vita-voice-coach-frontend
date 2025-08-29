@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   title: "Vita Kociubajło – Trenerka głosu i śpiewu",
   description:
     "Lekcje śpiewu, rozwój głosu i przygotowanie do wystąpień publicznych. Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i umiejętności komunikacyjne.",
+
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

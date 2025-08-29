@@ -6,8 +6,10 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-purple-50 to-pink-100 px-6 py-12"
+      className="min-h-screen flex flex-col md:flex-row items-center justify-center 
+                 bg-(--brand-beige) px-6 py-12"
     >
+      {/* Text section */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -18,7 +20,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 1 }}
-          className="inline-block mb-4 px-4 py-1 text-sm bg-purple-200 text-purple-800 rounded-full"
+          className="inline-block mb-4 px-4 py-1 text-sm bg-(--brand-red)/20 text-(--brand-green) rounded-full"
         >
           Dostępna na warsztaty i sesje online
         </motion.span>
@@ -27,7 +29,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1 }}
-          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight"
+          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight text-(--brand-green)"
         >
           Trenerka Głosu i Śpiewu 🎤
         </motion.h1>
@@ -36,33 +38,40 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 1 }}
-          className="text-base sm:text-lg md:text-xl mb-6"
+          className="text-base sm:text-lg md:text-xl mb-6 text-(--brand-sage)"
         >
           Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i
           umiejętności wystąpień publicznych – w śpiewie i w życiu codziennym.
         </motion.p>
 
+        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0"
         >
+          {/* Primary button */}
           <a
             href="#services"
-            className="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition text-center"
+            className="px-6 py-3 bg-(--brand-green) text-white font-medium rounded-md shadow 
+               hover:bg-(--brand-sage) transition-colors duration-300 text-center"
           >
             Moje Usługi
           </a>
+
+          {/* Secondary button */}
           <a
             href="#contact"
-            className="px-6 py-3 border border-purple-600 text-purple-600 rounded-md hover:bg-purple-50 transition text-center"
+            className="px-6 py-3 border border-(--brand-green) text-(--brand-green) font-medium rounded-md 
+               hover:bg-(--brand-red)/20 transition-colors duration-300 text-center"
           >
             Umów się na konsultację
           </a>
         </motion.div>
       </motion.div>
 
+      {/* Image */}
       <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}

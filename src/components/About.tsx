@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-brand-beige">
       <div className="max-w-6xl mx-auto px-6 md:grid md:grid-cols-2 md:gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -30,8 +30,10 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
           className="mt-10 md:mt-0"
         >
-          <h2 className="text-3xl font-bold mb-4">O mnie 🎶</h2>
-          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+          <h2 className="text-3xl font-bold mb-4 text-brand-green">
+            O mnie 🎶
+          </h2>
+          <p className="text-lg text-brand-sage mb-6 leading-relaxed">
             Nazywam się <strong>Vita Kociubajło</strong>. Jestem trenerką głosu,
             dyrygentką i aktywistką muzyczną. Od lat pomagam ludziom rozwijać
             swoje umiejętności wokalne, pewność siebie i czerpać radość ze
@@ -39,8 +41,10 @@ export default function About() {
             granicą.
           </p>
 
-          <h3 className="text-xl font-semibold mb-3">Specjalizacje:</h3>
-          <ul className="grid grid-cols-2 gap-3 text-gray-800 mb-6">
+          <h3 className="text-xl font-semibold mb-3 text-(--brand-green)">
+            Specjalizacje:
+          </h3>
+          <ul className="grid grid-cols-2 gap-3 text-(--brand-green) mb-6">
             <li>🎤 Nauka śpiewu</li>
             <li>🎶 Dyrygentura</li>
             <li>💎 Rozwój osobisty</li>
@@ -50,13 +54,13 @@ export default function About() {
           <div className="flex flex-wrap gap-4">
             <a
               href="#services"
-              className="px-6 py-3 bg-purple-600 text-white rounded-md shadow hover:bg-purple-700 transition"
+              className="px-6 py-3 bg-(--brand-green) text-white rounded-md shadow hover:bg-(--brand-sage) transition"
             >
               Poznaj moje usługi
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 border border-purple-600 text-purple-600 rounded-md hover:bg-purple-50 transition"
+              className="px-6 py-3 border border-(--brand-red) text-(--brand-red) rounded-md hover:bg-(--brand-red)/10 transition"
             >
               Umów się na konsultację
             </a>
