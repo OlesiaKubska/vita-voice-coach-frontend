@@ -6,87 +6,97 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex flex-col md:flex-row items-center justify-center 
-                 bg-(--brand-beige) px-6 py-12"
+      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-6 py-12"
     >
-      {/* Text section */}
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        className="text-center md:text-left max-w-xl md:mr-12"
-      >
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 1 }}
-          className="inline-block mb-4 px-4 py-1 text-sm bg-(--brand-red)/20 text-(--brand-green) rounded-full"
-        >
-          Dostępna na warsztaty i sesje online
-        </motion.span>
+      {/* ✅ Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/hero/group-hero.webp')" }}
+      />
+      {/* ✅ Overlay з легким розмиттям */}
+      <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 1 }}
-          className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight text-(--brand-green)"
-        >
-          Trenerka Głosu i Śpiewu 🎤
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 1 }}
-          className="text-base sm:text-lg md:text-xl mb-6 text-(--brand-sage)"
-        >
-          Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i
-          umiejętności wystąpień publicznych – w śpiewie i w życiu codziennym.
-        </motion.p>
-
-        {/* Buttons */}
+      {/* ✅ Контент поверх */}
+      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full">
+        {/* Text section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center md:text-left max-w-xl md:mr-12"
         >
-          {/* Primary button */}
-          <a
-            href="#services"
-            className="px-6 py-3 bg-(--brand-green) text-white font-medium rounded-md shadow 
-               hover:bg-(--brand-sage) transition-colors duration-300 text-center"
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="inline-block mb-4 px-4 py-1 text-sm bg-(--brand-rose) text-(--brand-beige) rounded-full"
           >
-            Moje Usługi
-          </a>
+            Dostępna na warsztaty i sesje online
+          </motion.span>
 
-          {/* Secondary button */}
-          <a
-            href="#contact"
-            className="px-6 py-3 border border-(--brand-green) text-(--brand-green) font-medium rounded-md 
-               hover:bg-(--brand-red)/20 transition-colors duration-300 text-center"
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight text-(--brand-green)"
           >
-            Umów się na konsultację
-          </a>
+            Trenerka Głosu i Śpiewu 🎙️
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 1 }}
+            className="text-base sm:text-lg md:text-xl mb-6 text-(--brand-sage)"
+          >
+            Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i
+            umiejętności wystąpień publicznych – w śpiewie i w życiu codziennym.
+          </motion.p>
+
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0"
+          >
+            {/* Primary button */}
+            <a
+              href="#services"
+              className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
+               hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
+            >
+              Moja Oferta
+            </a>
+
+            {/* Secondary button */}
+            <a
+              href="#contact"
+              className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
+               hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
+            >
+              Umów się na konsultację
+            </a>
+          </motion.div>
         </motion.div>
-      </motion.div>
 
-      {/* Image */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="relative mt-10 md:mt-0 w-48 sm:w-60 md:w-[28rem] aspect-[3/4]"
-      >
-        <Image
-          src="/images/vita-hero.jpg"
-          alt="Trenerka głosu i śpiewu"
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="rounded-lg shadow-lg object-cover"
-          priority
-        />
-      </motion.div>
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="relative mt-10 md:mt-0 w-48 sm:w-60 md:w-[28rem] aspect-[3/4]"
+        >
+          <Image
+            src="/images/hero/hero.png"
+            alt="Trenerka głosu i śpiewu"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="rounded-lg object-cover"
+            priority
+          />
+        </motion.div>
+      </div>
     </section>
   );
 }

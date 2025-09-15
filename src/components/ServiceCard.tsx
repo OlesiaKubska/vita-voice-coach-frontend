@@ -8,7 +8,7 @@ interface ServiceCardProps {
 export default function ServiceCard({ title, description }: ServiceCardProps) {
   return (
     <div className="relative group perspective">
-      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-(--brand-green)/40 via-(--brand-sage)/40 to-(--brand-red)/40 animate-pulse"></div>
+      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-(--brand-green)/40 via-(--brand-sage)/40 to-(--brand-rose)/40 animate-pulse"></div>
 
       <div
         className="relative border border-(--brand-sage)/30 rounded-lg p-6 shadow-md bg-white/80 backdrop-blur-sm 

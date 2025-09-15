@@ -35,7 +35,7 @@ export default function ContactPage() {
           className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg"
         >
           <Image
-            src="/images/contact.jpg"
+            src="/images/about/contact.jpg"
             alt="Vita Kociubajło – kontakt"
             fill
             className="object-cover"
@@ -74,7 +74,7 @@ export default function ContactPage() {
       >
         <a
           href="mailto:email@gmail.com"
-          className="px-6 py-3 bg-(--brand-red) text-white font-semibold rounded-md shadow hover:bg-(--brand-green) transition"
+          className="px-6 py-3 bg-(--brand-rose) text-white font-semibold rounded-md shadow hover:bg-(--brand-green) transition"
         >
           Napisz do mnie
         </a>

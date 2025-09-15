@@ -7,10 +7,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="flex justify-between items-center p-4 bg-(--brand-beige) shadow-md fixed w-full z-10">
+    <nav className="flex justify-between items-center p-4 bg-(--brand-beige) backdrop-blur-sm shadow-md fixed w-full z-10 transition-colors duration-300">
       <Link href="/" className="flex items-center space-x-2">
         <Image
-          src="/images/logo.png"
+          src="/images/branding/logo.png"
           alt="Vita Voice Logo"
           width={40}
           height={40}
@@ -23,19 +23,19 @@ export default function Navbar() {
 
       {/* Desktop menu */}
       <div className="hidden md:flex space-x-6 text-(--brand-green) font-medium">
-        <Link href="/" className="hover:text-(--brand-red) transition">
+        <Link href="/" className="hover:text-(--brand-rose) transition">
           Strona główna
         </Link>
-        <Link href="/about" className="hover:text-(--brand-red) transition">
+        <Link href="/about" className="hover:text-(--brand-rose) transition">
           O mnie
         </Link>
-        <Link href="/services" className="hover:text-(--brand-red) transition">
-          Usługi
+        <Link href="/services" className="hover:text-(--brand-rose) transition">
+          Oferta
         </Link>
-        <Link href="/blog" className="hover:text-(--brand-red) transition">
+        <Link href="/blog" className="hover:text-(--brand-rose) transition">
           Blog
         </Link>
-        <Link href="/contact" className="hover:text-(--brand-red) transition">
+        <Link href="/contact" className="hover:text-(--brand-rose) transition">
           Kontakt
         </Link>
       </div>
@@ -56,35 +56,35 @@ export default function Navbar() {
           <Link
             href="/"
             onClick={() => setIsOpen(false)}
-            className="hover:text-(--brand-red) transition"
+            className="hover:text-(--brand-rose) transition"
           >
             Strona główna
           </Link>
           <Link
             href="/about"
             onClick={() => setIsOpen(false)}
-            className="hover:text-(--brand-red) transition"
+            className="hover:text-(--brand-rose) transition"
           >
             O mnie
           </Link>
           <Link
             href="/services"
             onClick={() => setIsOpen(false)}
-            className="hover:text-(--brand-red) transition"
+            className="hover:text-(--brand-rose) transition"
           >
-            Usługi
+            Oferta
           </Link>
           <Link
             href="/blog"
             onClick={() => setIsOpen(false)}
-            className="hover:text-(--brand-red) transition"
+            className="hover:text-(--brand-rose) transition"
           >
             Blog
           </Link>
           <Link
             href="/contact"
             onClick={() => setIsOpen(false)}
-            className="hover:text-(--brand-red) transition"
+            className="hover:text-(--brand-rose) transition"
           >
             Kontakt
           </Link>

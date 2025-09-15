@@ -14,7 +14,7 @@ export default function About() {
           className="relative w-56 h-[360px] sm:w-64 sm:h-[420px] md:w-80 md:h-[480px] lg:w-[24rem] lg:h-[600px] mx-auto md:mx-0"
         >
           <Image
-            src="/images/vita-about.jpg"
+            src="/images/about/vita-about.jpg"
             alt="Vita Kociubajło – trenerka głosu"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -56,11 +56,11 @@ export default function About() {
               href="#services"
               className="px-6 py-3 bg-(--brand-green) text-white rounded-md shadow hover:bg-(--brand-sage) transition"
             >
-              Poznaj moje usługi
+              Poznaj moją ofertę
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 border border-(--brand-red) text-(--brand-red) rounded-md hover:bg-(--brand-red)/10 transition"
+              className="px-6 py-3 border border-(--brand-rose) text-(--brand-rose) rounded-md hover:bg-(--brand-rose)/10 transition"
             >
               Umów się na konsultację
             </a>

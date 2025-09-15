@@ -9,13 +9,13 @@ export default function Footer() {
     <footer className="bg-(--brand-green) text-white text-center py-8 mt-10">
       <Link href="/" className="flex items-center space-x-2 ml-10">
         <Image
-          src="/images/voice-logo.png"
+          src="/images/branding/voice-logo.png"
           alt="Vita Voice Logo"
           width={80}
           height={80}
           className="rounded"
         />
-        <span className="text-xl font-bold text-(--brand-red) hidden sm:inline">
+        <span className="text-xl font-bold text-(--brand-rose) hidden sm:inline">
           Vita Voice
         </span>
       </Link>
@@ -25,7 +25,7 @@ export default function Footer() {
           href="https://facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-(--brand-red) transition"
+          className="hover:text-(--brand-rose) transition"
         >
           <FaFacebookF size={20} />
         </a>
@@ -33,7 +33,7 @@ export default function Footer() {
           href="https://instagram.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-(--brand-red) transition"
+          className="hover:text-(--brand-rose) transition"
         >
           <FaInstagram size={20} />
         </a>
@@ -41,7 +41,7 @@ export default function Footer() {
           href="https://youtube.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-(--brand-red) transition"
+          className="hover:text-(--brand-rose) transition"
         >
           <FaYoutube size={20} />
         </a>
