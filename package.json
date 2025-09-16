@@ -10,6 +10,7 @@
     "tailwind": "tailwindcss"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "axios": "^1.11.0",
     "framer-motion": "^12.23.12",
     "next": "15.5.0",

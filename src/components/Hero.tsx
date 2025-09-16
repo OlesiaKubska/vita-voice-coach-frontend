@@ -13,10 +13,8 @@ export default function Hero() {
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/hero/group-hero.webp')" }}
       />
-      {/* ✅ Overlay з легким розмиттям */}
       <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
 
-      {/* ✅ Контент поверх */}
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full">
         {/* Text section */}
         <motion.div
@@ -47,7 +45,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 1 }}
-            className="text-base sm:text-lg md:text-xl mb-6 text-(--brand-sage)"
+            className="text-base sm:text-lg md:text-xl mb-6 text-(--brand-green)"
           >
             Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i
             umiejętności wystąpień publicznych – w śpiewie i w życiu codziennym.

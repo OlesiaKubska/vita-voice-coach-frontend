@@ -10,7 +10,7 @@ export default function Slogan() {
       className="text-center py-3 bg-white/60 backdrop-blur-sm shadow-md"
     >
       <h2
-        className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text
+        className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text
         bg-gradient-to-r from-[var(--brand-rose)] via-[var(--brand-sage)] to-[var(--brand-green)]
         animate-gradient-x italic tracking-wide"
       >

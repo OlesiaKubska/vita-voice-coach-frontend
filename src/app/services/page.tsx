@@ -22,7 +22,7 @@ export default function ServicesPage() {
           transition={{ duration: 0.8 }}
           className="text-4xl font-bold mb-10 text-center"
         >
-          Moje Usługi
+          Moja oferta 🎤
         </motion.h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -11,9 +11,9 @@ export default function ContactPage() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="text-4xl font-bold mb-6 text-center text-(--brand-green)"
+        className="text-4xl font-bold mb-10 text-center text-(--brand-green)"
       >
-        Kontakt
+        Kontakt 📲
       </motion.h1>
 
       <motion.p
@@ -54,7 +54,7 @@ export default function ContactPage() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: i * 0.2 }}
               viewport={{ once: true }}
-              className="bg-(--brand-beige) shadow-md rounded-lg p-6 border-l-4 border-(--brand-green)"
+              className="bg-(--brand-beige) shadow-md rounded-lg p-6 border-l-4 border-(--brand-rose) hover:shadow-xl hover:-translate-y-1 transition transform"
             >
               <h2 className="text-2xl font-semibold mb-2 text-(--brand-green)">
                 {item.title}
@@ -74,7 +74,8 @@ export default function ContactPage() {
       >
         <a
           href="mailto:email@gmail.com"
-          className="px-6 py-3 bg-(--brand-rose) text-white font-semibold rounded-md shadow hover:bg-(--brand-green) transition"
+          className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
+               hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
         >
           Napisz do mnie
         </a>

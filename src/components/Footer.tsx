@@ -1,54 +1,90 @@
 "use client";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Image from "next/image";
-
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-(--brand-green) text-white text-center py-8 mt-10">
-      <Link href="/" className="flex items-center space-x-2 ml-10">
-        <Image
-          src="/images/branding/voice-logo.png"
-          alt="Vita Voice Logo"
-          width={80}
-          height={80}
-          className="rounded"
-        />
-        <span className="text-xl font-bold text-(--brand-rose) hidden sm:inline">
-          Vita Voice
-        </span>
-      </Link>
+    <footer className="bg-(--brand-green) text-(--brand-beige) py-10 mt-10">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+        <Link href="/" className="flex flex-col items-center md:items-start">
+          <div className="relative w-20 h-20 mb-4">
+            <Image
+              src="/images/branding/voice-logo.png"
+              alt="Vita Voice Logo"
+              fill
+              sizes="(max-width: 768px) 60px, 80px"
+              className="object-contain rounded"
+              priority
+            />
+          </div>
+          <span className="text-xl font-bold text-(--brand-rose)">
+            Vita Voice
+          </span>
+        </Link>
 
-      <div className="flex justify-center space-x-6 mb-4">
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-(--brand-rose) transition"
-        >
-          <FaFacebookF size={20} />
-        </a>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-(--brand-rose) transition"
-        >
-          <FaInstagram size={20} />
-        </a>
-        <a
-          href="https://youtube.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-(--brand-rose) transition"
-        >
-          <FaYoutube size={20} />
-        </a>
+        <div className="flex flex-col space-y-2">
+          <Link
+            href="/"
+            className="hover:text-(--brand-rose) transition-colors duration-300"
+          >
+            Strona główna
+          </Link>
+          <Link
+            href="/about"
+            className="hover:text-(--brand-rose) transition-colors duration-300"
+          >
+            O mnie
+          </Link>
+          <Link
+            href="/services"
+            className="hover:text-(--brand-rose) transition-colors duration-300"
+          >
+            Oferta
+          </Link>
+          <Link
+            href="/blog"
+            className="hover:text-(--brand-rose) transition-colors duration-300"
+          >
+            Blog
+          </Link>
+          <Link
+            href="/contact"
+            className="hover:text-(--brand-rose) transition-colors duration-300"
+          >
+            Kontakt
+          </Link>
+        </div>
+
+        <div className="flex justify-center md:justify-end space-x-6">
+          {[
+            { href: "https://facebook.com", icon: FaFacebookF },
+            { href: "https://instagram.com", icon: FaInstagram },
+            { href: "https://youtube.com", icon: FaYoutube },
+            { href: "https://linkedin.com", icon: FaLinkedinIn },
+          ].map(({ href, icon: Icon }, i) => (
+            <motion.a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.2 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="hover:text-(--brand-rose) transition-colors duration-300"
+            >
+              <Icon size={20} />
+            </motion.a>
+          ))}
+        </div>
       </div>
 
-      {/* Copyright */}
-      <p className="text-sm text-(--brand-beige)/80">
+      <p className="text-center text-sm mt-6 text-(--brand-beige)/70">
         © {new Date().getFullYear()} Vita Kociubajło – Trenerka Głosu i Śpiewu
       </p>
     </footer>

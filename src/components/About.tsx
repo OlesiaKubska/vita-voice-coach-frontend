@@ -4,7 +4,15 @@ import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-brand-beige">
+    <section id="about" className="py-20 bg-(--brand-rose)/10">
+      <motion.h1
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl font-bold mb-10 text-center"
+      >
+        O mnie 🎶
+      </motion.h1>
       <div className="max-w-6xl mx-auto px-6 md:grid md:grid-cols-2 md:gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -30,9 +38,6 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
           className="mt-10 md:mt-0"
         >
-          <h2 className="text-3xl font-bold mb-4 text-brand-green">
-            O mnie 🎶
-          </h2>
           <p className="text-lg text-brand-sage mb-6 leading-relaxed">
             Nazywam się <strong>Vita Kociubajło</strong>. Jestem trenerką głosu,
             dyrygentką i aktywistką muzyczną. Od lat pomagam ludziom rozwijać
@@ -54,13 +59,15 @@ export default function About() {
           <div className="flex flex-wrap gap-4">
             <a
               href="#services"
-              className="px-6 py-3 bg-(--brand-green) text-white rounded-md shadow hover:bg-(--brand-sage) transition"
+              className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
+               hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
             >
               Poznaj moją ofertę
             </a>
             <a
               href="#contact"
-              className="px-6 py-3 border border-(--brand-rose) text-(--brand-rose) rounded-md hover:bg-(--brand-rose)/10 transition"
+              className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
+               hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
             >
               Umów się na konsultację
             </a>
