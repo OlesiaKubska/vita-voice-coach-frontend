@@ -53,28 +53,33 @@ export default function Hero() {
 
           {/* Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
             className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0"
           >
             {/* Primary button */}
-            <a
+            <motion.a
               href="#services"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
               className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
                hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
             >
               Moja Oferta
-            </a>
+            </motion.a>
 
             {/* Secondary button */}
-            <a
+            <motion.a
               href="#contact"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
               className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
                hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
             >
               Umów się na konsultację
-            </a>
+            </motion.a>
           </motion.div>
         </motion.div>
 
@@ -86,7 +91,7 @@ export default function Hero() {
           className="relative mt-10 md:mt-0 w-48 sm:w-60 md:w-[28rem] aspect-[3/4]"
         >
           <Image
-            src="/images/hero/hero.png"
+            src="/images/hero/hero2.webp"
             alt="Trenerka głosu i śpiewu"
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

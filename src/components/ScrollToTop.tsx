@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ArrowUpIcon } from "@heroicons/react/24/solid";
 
@@ -17,15 +18,17 @@ export default function ScrollToTop() {
 
   return (
     isVisible && (
-      <button
+      <motion.button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 300 }}
         className="fixed bottom-6 right-6 p-3 rounded-full shadow-lg 
                    border border-(--brand-rose) bg-(--brand-beige) text-(--brand-rose) 
-                   hover:bg-(--brand-green) transition-colors duration-300"
+                   hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300"
         aria-label="Scroll to top"
       >
         <ArrowUpIcon className="h-6 w-6" />
-      </button>
+      </motion.button>
     )
   );
 }

@@ -56,22 +56,32 @@ export default function About() {
             <li>🗣 Wystąpienia publiczne</li>
           </ul>
 
-          <div className="flex flex-wrap gap-4">
-            <a
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap gap-4"
+          >
+            <motion.a
               href="#services"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
               className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
                hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
             >
               Poznaj moją ofertę
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#contact"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
               className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
                hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
             >
               Umów się na konsultację
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </motion.div>
       </div>
     </section>
