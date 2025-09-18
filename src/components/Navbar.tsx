@@ -69,7 +69,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="absolute top-0 left-0 w-full bg-(--brand-beige) shadow-md flex flex-col items-center space-y-4 py-6 md:hidden text-(--brand-green) font-medium">
+        <div className="absolute z-50 top-0 left-0 w-full bg-(--brand-beige) shadow-md flex flex-col items-center space-y-4 py-6 md:hidden text-(--brand-green) font-medium">
           <Link
             href="/"
             onClick={() => setIsOpen(false)}

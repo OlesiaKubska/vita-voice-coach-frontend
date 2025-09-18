@@ -19,14 +19,14 @@ export default function About() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true, amount: 0.3 }}
-          className="relative w-56 h-[360px] sm:w-64 sm:h-[420px] md:w-80 md:h-[480px] lg:w-[24rem] lg:h-[600px] mx-auto md:mx-0"
+          className="relative w-full h-[500px] md:h-full max-h-[600px] mx-auto md:mx-0"
         >
           <Image
             src="/images/about/vita-about.jpg"
             alt="Vita Kociubajło – trenerka głosu"
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="rounded-lg shadow-lg object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="rounded-lg shadow-lg object-cover object-top"
             priority
           />
         </motion.div>
