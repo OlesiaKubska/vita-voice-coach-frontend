@@ -43,6 +43,12 @@ export default function BlogPage() {
                 post.content ? post.content.substring(0, 100) + "..." : ""
               }
               slug={post.slug}
+              date={post.publishedAt}
+              image={
+                typeof post.coverImage === "string"
+                  ? post.coverImage
+                  : post.coverImage?.url
+              }
             />
           </motion.div>
         ))}

@@ -23,6 +23,8 @@ export interface Post {
   coverImage?: { url: string } | string; 
   title: string;
   content: string;
+  publishedAt: string;
+  updatedAt: string;
 }
 
 export interface ServiceAttributes {

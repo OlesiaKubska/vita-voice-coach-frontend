@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { Post } from "../lib/types";
+import { FaArrowLeft } from "react-icons/fa";
 
 export default function PostContent({ post }: { post: Post }) {
   const imageUrl =
@@ -12,6 +14,15 @@ export default function PostContent({ post }: { post: Post }) {
 
   return (
     <>
+      <div className="sticky top-0 backdrop-blur-sm py-3 z-50 mb-4">
+        <Link
+          href="/blog"
+          className="inline-flex items-center text-(--brand-rose) font-medium hover:underline"
+        >
+          <FaArrowLeft className="mr-2" /> Wróć do bloga
+        </Link>
+      </div>
+
       <motion.h1
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -21,14 +32,27 @@ export default function PostContent({ post }: { post: Post }) {
         {post.title}
       </motion.h1>
 
+      <div className="text-sm text-gray-500 mb-4">
+        <p>
+          Opublikowano: {new Date(post.publishedAt).toLocaleDateString("pl-PL")}
+        </p>
+        <p>
+          Ostatnia aktualizacja:{" "}
+          {new Date(post.updatedAt).toLocaleDateString("pl-PL")}
+        </p>
+      </div>
+
       {imageUrl && (
-        <Image
-          src={`http://localhost:1337${imageUrl}`}
-          alt={post.title}
-          width={800}
-          height={400}
-          className="rounded-lg mb-6"
-        />
+        <div className="relative w-full h-80 mb-6">
+          <Image
+            src={`http://localhost:1337${imageUrl}`}
+            alt={post.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            className="object-cover rounded-lg"
+          />
+        </div>
       )}
 
       <motion.article
