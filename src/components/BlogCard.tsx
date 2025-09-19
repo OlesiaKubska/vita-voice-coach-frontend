@@ -45,7 +45,7 @@ export default function BlogCard({
         <p className="text-(--brand-sage) mb-4">{excerpt}</p>
         <Link
           href={`/blog/${slug}`}
-          className="inline-flex items-center  text-(--brand-rose) font-medium hover:underline"
+          className="inline-flex items-center text-(--brand-rose) font-medium hover:underline"
         >
           Czytaj więcej <FaArrowRight className="ml-2" />
         </Link>

@@ -35,8 +35,10 @@ export interface ServiceAttributes {
 
 export interface Service {
   id: number;
-  attributes: ServiceAttributes;
   title: string;
+  slug: string;
   description: string;
+  shortDescription: string;
   icon?: string;
+  image?: string;
 }

@@ -1,22 +1,45 @@
 "use client";
 
+import { IconType } from "react-icons";
+import * as FaIcons from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
+
 interface ServiceCardProps {
+  id?: number;
   title: string;
-  description: string;
+  shortDescription: string;
+  icon: string;
+  image?: string;
+  slug: string;
 }
 
-export default function ServiceCard({ title, description }: ServiceCardProps) {
-  return (
-    <div className="relative group perspective">
-      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-(--brand-green)/40 via-(--brand-sage)/40 to-(--brand-rose)/40 animate-pulse"></div>
+export default function ServiceCard({
+  title,
+  shortDescription,
+  icon,
+  slug,
+}: ServiceCardProps) {
+  const Icon: IconType =
+    FaIcons[icon as keyof typeof FaIcons] || FaIcons.FaStar;
 
-      <div
-        className="relative border border-(--brand-rose)/30 rounded-lg p-6 shadow-md bg-white/80 backdrop-blur-sm 
-                   hover:shadow-2xl transition-transform transform-gpu 
-                   group-hover:scale-105 group-hover:-rotate-1"
-      >
-        <h2 className="text-xl font-bold mb-2 text-(--brand-green)">{title}</h2>
-        <p className="text-(--brand-sage)">{description}</p>
+  return (
+    <div className="relative group">
+      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-(--brand-green) via-(--brand-sage) to-(--brand-rose)/60 animate-pulse"></div>
+      <div className="relative h-full border border-(--brand-rose)/30 rounded-lg p-6 shadow-md bg-white/80 backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition transform flex flex-col justify-between">
+        <div className="flex items-center gap-3 mb-4">
+          <Icon className="text-3xl text-(--brand-rose)" />
+          <h3 className="text-xl font-semibold text-(--brand-green)">
+            {title}
+          </h3>
+        </div>
+        <p className="text-(--brand-sage) mb-4">{shortDescription}</p>
+        <Link
+          href={`/services/${slug}`}
+          className="inline-flex items-center text-(--brand-rose) font-medium hover:underline"
+        >
+          Dowiedz się więcej <FaArrowRight className="ml-2" />
+        </Link>
       </div>
     </div>
   );
