@@ -8,7 +8,6 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-6 py-12"
     >
-      {/* ✅ Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/hero/group-hero.webp')" }}
@@ -16,7 +15,6 @@ export default function Hero() {
       <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
 
       <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full">
-        {/* Text section */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -65,7 +63,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
-               hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
+               hover:bg-(--brand-beige) hover:shadow-2xl hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
             >
               Moja Oferta
             </motion.a>
@@ -76,7 +74,7 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
-               hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
+               hover:bg-(--brand-rose) hover:shadow-2xl hover:text-(--brand-beige) transition-colors duration-300 text-center"
             >
               Umów się na konsultację
             </motion.a>
