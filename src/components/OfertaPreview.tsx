@@ -43,6 +43,7 @@ export default function OfertaPreview() {
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Ліва частина */}
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -64,11 +65,16 @@ export default function OfertaPreview() {
                 }}
                 transition={{ duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
-                className="inline-flex items-center shadow-lg justify-center gap-2 
-                            rounded-full bg-white/80 text-(--brand-green) 
-                            border border-(--brand-rose) 
-                            font-medium px-5 py-2 hover:bg-(--brand-rose)/20 
-                            transition cursor-default w-48 hover:shadow-2xl"
+                className="inline-flex items-center justify-center gap-2 
+                        rounded-full bg-white/80 text-(--brand-green) 
+                        border border-(--brand-rose) 
+                        font-medium px-5 py-2 cursor-default w-48
+                        transition-all duration-300
+                        hover:text-white 
+                        hover:bg-gradient-to-r 
+                        hover:from-pink-300 hover:via-green-200 hover:to-green-300
+                        bg-[length:200%_200%] hover:animate-gradient-x
+                        hover:shadow-[0_0_15px_rgba(244,114,182,0.5),0_0_25px_rgba(134,239,172,0.5)]"
               >
                 {category.icon}
                 {category.name}
@@ -84,9 +90,12 @@ export default function OfertaPreview() {
             >
               <Link
                 href="/services"
-                className="inline-flex items-center font-medium px-6 py-3 bg-(--brand-rose) 
-                            shadow-lg border border-(--brand-rose) text-(--brand-beige) rounded-md 
-                            hover:bg-(--brand-beige) hover:text-(--brand-rose) hover:shadow-2xl transition-all duration-300"
+                className="inline-flex items-center font-medium px-6 py-3 
+                           rounded-md shadow-lg
+                           bg-gradient-to-r from-pink-300 via-green-200 to-green-300 text-(--brand-green)
+                           hover:text-white bg-[length:200%_200%] animate-gradient-x
+                           hover:shadow-[0_0_15px_rgba(244,114,182,0.5),0_0_25px_rgba(134,239,172,0.5)]
+                           transition-all duration-300"
               >
                 Zobacz całą ofertę <FaArrowRight className="ml-2" />
               </Link>
@@ -103,33 +112,33 @@ export default function OfertaPreview() {
                 transition: { staggerChildren: 0.2 },
               },
             }}
-            className="grid grid-cols-2 gap-8 lg:gap-12 text-center"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-12 text-center"
           >
             {[
               {
                 icon: (
-                  <FaMicrophone className="text-5xl text-(--brand-rose) mx-auto mb-4" />
+                  <FaMicrophone className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
                 number: "50+",
                 label: "Uczniów",
               },
               {
                 icon: (
-                  <FaUsers className="text-5xl text-(--brand-rose) mx-auto mb-4" />
+                  <FaUsers className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
                 number: "30+",
                 label: "Warsztatów dla kobiet",
               },
               {
                 icon: (
-                  <FaMusic className="text-5xl text-(--brand-rose) mx-auto mb-4" />
+                  <FaMusic className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
                 number: "1000+",
                 label: "Godzin nagrań",
               },
               {
                 icon: (
-                  <FaCalendarAlt className="text-5xl text-(--brand-rose) mx-auto mb-4" />
+                  <FaCalendarAlt className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
                 number: "7+",
                 label: "Lat doświadczenia",
@@ -143,9 +152,16 @@ export default function OfertaPreview() {
                 }}
                 transition={{ duration: 0.6 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white/80 shadow-lg rounded-2xl p-8 hover:shadow-2xl transition"
+                className="bg-white/80 shadow-lg rounded-2xl p-8 hover:shadow-2xl transition flex flex-col items-center"
               >
-                {item.icon}
+                <div
+                  className="w-16 h-16 flex items-center justify-center rounded-xl 
+                      bg-gradient-to-r from-pink-300 via-green-200 to-green-300 
+                      bg-[length:200%_200%] animate-gradient-x shadow-md mb-4"
+                >
+                  {item.icon}
+                </div>
+
                 <h3 className="text-3xl font-bold text-(--brand-green)">
                   {item.number}
                 </h3>

@@ -64,10 +64,22 @@ export default function Footer() {
 
         <div className="flex justify-center md:justify-end space-x-6">
           {[
-            { href: "https://facebook.com", icon: FaFacebookF },
-            { href: "https://instagram.com", icon: FaInstagram },
-            { href: "https://youtube.com", icon: FaYoutube },
-            { href: "https://linkedin.com", icon: FaLinkedinIn },
+            {
+              href: "https://www.facebook.com/vita.kociubajlo.vitaVoice",
+              icon: FaFacebookF,
+            },
+            {
+              href: "https://www.instagram.com/akademia_dobrego_glosu/?utm_source=qr&igsh=d3AxZTE5OG91MTBk#",
+              icon: FaInstagram,
+            },
+            {
+              href: "https://www.youtube.com/vita.kociubajlo.vitaVoice",
+              icon: FaYoutube,
+            },
+            {
+              href: "https://www.linkedin.com/in/vita-kociubajlo",
+              icon: FaLinkedinIn,
+            },
           ].map(({ href, icon: Icon }, i) => (
             <motion.a
               key={i}
