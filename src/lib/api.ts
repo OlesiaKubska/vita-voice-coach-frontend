@@ -1,5 +1,5 @@
 import axios from "axios";
-import { StrapiResponse, Post, Service } from "./types";
+import { StrapiResponse, Post, Service, Testimonial } from "./types";
 
 const API_URL = "http://localhost:1337/api";
 
@@ -13,5 +13,13 @@ export async function getPosts(): Promise<Post[]> {
 // Services
 export async function getServices(): Promise<Service[]> {
   const res = await axios.get<StrapiResponse<Service>>(`${API_URL}/services`);
+
+  return res.data.data;
+}
+
+// Testimonials
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const res = await axios.get<StrapiResponse<Testimonial>>(`${API_URL}/testimonials?populate=photo`);
+  
   return res.data.data;
 }

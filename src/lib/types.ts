@@ -42,3 +42,33 @@ export interface Service {
   icon?: string;
   image?: string;
 }
+
+// Testimonial Types
+export interface Media {
+  url: string;
+}
+
+export interface TestimonialAttributes {
+  author: string;
+  text: string;
+  rating: number;
+  photo: {
+    data?: {
+      attributes: {
+        url: string;
+      };
+    } | null;
+  };
+  publishedAt: string;
+}
+
+export interface Testimonial {
+id: number;
+  author: string;
+  text: string;
+  rating: number;
+  photo?: {
+    url: string;
+  };
+  publishedAt: string;
+}

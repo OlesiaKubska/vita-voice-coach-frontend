@@ -14,7 +14,7 @@ const cardVariants = {
 
 export default function ContactPage() {
   return (
-    <section className="max-w-5xl mx-auto py-20 px-6">
+    <section className=" mx-auto py-20 px-6 bg-(--brand-rose)/10">
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -55,8 +55,8 @@ export default function ContactPage() {
 
         <div className="space-y-6">
           {[
-            { title: "📧 Email", value: "email@gmail.com" },
-            { title: "📱 Telefon", value: "+48 123 456 789" },
+            { title: "📧 Email", value: "vkociubajlo@gmail.com" },
+            { title: "📱 Telefon", value: "+48 517 522 820" },
             {
               title: "📍 Lokalizacja",
               value: "Białystok, Polska",

@@ -2,12 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaYoutube,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -75,10 +70,6 @@ export default function Footer() {
             {
               href: "https://www.youtube.com/vita.kociubajlo.vitaVoice",
               icon: FaYoutube,
-            },
-            {
-              href: "https://www.linkedin.com/in/vita-kociubajlo",
-              icon: FaLinkedinIn,
             },
           ].map(({ href, icon: Icon }, i) => (
             <motion.a
