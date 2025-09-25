@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { sendBotMessage } from "../lib/botApi";
 
 export default function ChatWidget() {
   const [messages, setMessages] = useState<
@@ -46,7 +47,7 @@ export default function ChatWidget() {
     if (!input.trim()) return;
 
     const userMessage: { sender: "user"; text: string } = {
-      sender: "user",
+      sender: "user" as const,
       text: input,
     };
     setMessages((prev) => [...prev, userMessage]);
@@ -54,16 +55,10 @@ export default function ChatWidget() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input, user_id: "frontend-user" }),
-      });
-
-      const data = await res.json();
-      const botMessage: { sender: "bot"; text: string } = {
-        sender: "bot",
-        text: data.reply || "Błąd odpowiedzi 🤖",
+      const reply = await sendBotMessage(input, "frontend-user");
+      const botMessage = {
+        sender: "bot" as const,
+        text: reply || "⚠️ Brak odpowiedzi",
       };
 
       setMessages((prev) => [...prev, botMessage]);

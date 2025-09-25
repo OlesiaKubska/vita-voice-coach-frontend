@@ -101,7 +101,7 @@ export default function ContactPage() {
         className="mt-12 flex flex-col sm:flex-row justify-center gap-4"
       >
         <motion.a
-          href="mailto:email@gmail.com"
+          href="mailto:vkociubajlo@gmail.com"
           aria-label="Wyślij email do Vita Kociubajło"
           whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", stiffness: 200 }}
@@ -113,7 +113,7 @@ export default function ContactPage() {
         </motion.a>
 
         <motion.a
-          href="tel:+48123456789"
+          href="tel:+48517522820"
           aria-label="Zadzwoń teraz do Vita Kociubajło"
           whileHover={{ scale: 1.04 }}
           transition={{ type: "spring", stiffness: 200 }}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { StrapiResponse, Post, Service, Testimonial } from "./types";
 
-const API_URL = "http://localhost:1337/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Posts
 export async function getPosts(): Promise<Post[]> {
