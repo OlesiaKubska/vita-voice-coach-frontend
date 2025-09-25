@@ -14,7 +14,7 @@ export default function Slogan() {
         bg-gradient-to-r from-[var(--brand-rose)] via-[var(--brand-sage)] to-[var(--brand-green)]
         animate-gradient-x italic tracking-wide"
       >
-        🎶 Vita – kobieta wielu wymiarów
+        Vita – kobieta wielu wymiarów
       </h2>
     </motion.div>
   );

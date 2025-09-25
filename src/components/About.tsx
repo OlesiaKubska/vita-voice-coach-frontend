@@ -11,7 +11,7 @@ export default function About() {
         transition={{ duration: 0.8 }}
         className="text-4xl font-bold mb-10 text-center"
       >
-        O mnie 🎶
+        O mnie
       </motion.h1>
       <div className="max-w-6xl mx-auto px-6 md:grid md:grid-cols-2 md:gap-12 items-center">
         <motion.div

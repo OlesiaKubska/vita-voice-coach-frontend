@@ -7,11 +7,6 @@ import { Service } from "../lib/types";
 import { FaArrowLeft } from "react-icons/fa";
 
 export default function ServiceContent({ service }: { service: Service }) {
-  //   const imageUrl =
-  //     typeof service.coverImage === "string"
-  //       ? service.coverImage
-  //       : service.coverImage?.url;
-
   return (
     <main className="max-w-3xl mx-auto py-20 px-6">
       <Link

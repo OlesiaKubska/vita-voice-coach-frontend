@@ -22,7 +22,7 @@ export default function ContactPage() {
         viewport={{ once: true }}
         className="text-4xl font-bold mb-10 text-center text-(--brand-green)"
       >
-        Kontakt 📲
+        Kontakt
       </motion.h1>
 
       <motion.p

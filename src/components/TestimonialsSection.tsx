@@ -34,7 +34,7 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           className="text-4xl font-bold mb-12 text-(--brand-green) text-center"
         >
-          Opinie klientów 💬
+          Opinie klientów
         </motion.h2>
 
         <Swiper

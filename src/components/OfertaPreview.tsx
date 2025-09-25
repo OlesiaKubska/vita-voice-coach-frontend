@@ -39,7 +39,7 @@ export default function OfertaPreview() {
           viewport={{ once: true }}
           className="text-4xl font-bold mb-12 text-(--brand-green) flex justify-center items-center gap-3 text-center"
         >
-          Moja oferta <FaMicrophone className="text-(--brand-rose)" />
+          Moja oferta
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -118,28 +118,28 @@ export default function OfertaPreview() {
                 icon: (
                   <FaMicrophone className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
-                number: "50+",
-                label: "Uczniów",
+                number: "500",
+                label: "Godzin pracy indywidualnej z klientami",
               },
               {
                 icon: (
                   <FaUsers className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
-                number: "30+",
+                number: "250",
                 label: "Warsztatów dla kobiet",
               },
               {
                 icon: (
                   <FaMusic className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
-                number: "1000+",
+                number: "758",
                 label: "Godzin nagrań",
               },
               {
                 icon: (
                   <FaCalendarAlt className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
                 ),
-                number: "7+",
+                number: "25",
                 label: "Lat doświadczenia",
               },
             ].map((item, i) => (

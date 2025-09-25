@@ -27,7 +27,7 @@ export default function Hero() {
             transition={{ delay: 0.3, duration: 1 }}
             className="inline-block mb-4 px-4 py-1 text-sm bg-(--brand-rose) text-(--brand-beige) rounded-full"
           >
-            Dostępna na warsztaty i sesje online
+            Vita – kobieta wielu wymiarów
           </motion.span>
 
           <motion.h1
@@ -36,7 +36,7 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 1 }}
             className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight text-(--brand-green)"
           >
-            Trenerka Głosu i Śpiewu 🎙️
+            Trenerka Głosu i Pewności Siebie
           </motion.h1>
 
           <motion.p

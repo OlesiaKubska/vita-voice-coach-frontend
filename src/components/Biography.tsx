@@ -84,7 +84,7 @@ export default function Biography() {
         viewport={{ once: true }}
         className="text-4xl font-bold text-center text-(--brand-green) mb-12"
       >
-        Moja historia 🎼
+        Moja historia
       </motion.h2>
 
       <div className="max-w-6xl mx-auto px-6 space-y-10">
