@@ -11,7 +11,7 @@ const config: Config = {
       colors: {
         brand: {
           green: "#214424",
-          red: "#F03446",
+          rose: "##D96689",
           beige: "#F6F2EE",
           sage: "#798478",
         },
