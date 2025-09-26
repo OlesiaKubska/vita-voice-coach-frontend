@@ -1,8 +1,8 @@
 import Hero from "../components/Hero";
 import About from "../components/About";
-import Contact from "../app/contact/page";
 import OfertaPreview from "../components/OfertaPreview";
 import TestimonialsSection from "../components/TestimonialsSection";
+import ContactInfo from "@/components/contact/ContactInfo";
 
 export default function Home() {
   return (
@@ -11,7 +11,7 @@ export default function Home() {
       <OfertaPreview />
       <About />
       <TestimonialsSection />
-      <Contact />
+      <ContactInfo />
     </>
   );
 }

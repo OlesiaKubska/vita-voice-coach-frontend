@@ -13,7 +13,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="bg-(--brand-green) text-(--brand-beige) py-10 mt-10">
+    <footer className="bg-(--brand-green) text-(--brand-beige) py-10">
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
         <Link href="/" className="flex flex-col items-center md:items-start">
           <div className="relative w-20 h-20 mb-4">
