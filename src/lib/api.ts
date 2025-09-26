@@ -12,7 +12,7 @@ export async function getPosts(): Promise<Post[]> {
 
 // Services
 export async function getServices(): Promise<Service[]> {
-  const res = await axios.get<StrapiResponse<Service>>(`${API_URL}/services`);
+  const res = await axios.get<StrapiResponse<Service>>(`${API_URL}/services?populate=*`);
 
   return res.data.data;
 }

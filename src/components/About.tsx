@@ -23,7 +23,7 @@ export default function About() {
           className="relative w-full h-[500px] md:h-full max-h-[600px] mx-auto md:mx-0"
         >
           <Image
-            src="/images/about/vita-about.jpg"
+            src="/images/about/vita-about-mobile.jpg"
             alt="Vita Kociubajło – trenerka głosu"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -40,11 +40,18 @@ export default function About() {
           className="mt-10 md:mt-0"
         >
           <p className="text-lg text-brand-sage mb-6 leading-relaxed">
-            Nazywam się <strong>Vita Kociubajło</strong>. Jestem trenerką głosu,
-            dyrygentką i aktywistką muzyczną. Od lat pomagam ludziom rozwijać
-            swoje umiejętności wokalne, pewność siebie i czerpać radość ze
-            śpiewu. Pracowałam z chórami, młodzieżą i dorosłymi w Polsce i za
-            granicą.
+            Nazywam się{" "}
+            <strong className="text-(--brand-rose)">Vita Kociubajło</strong>.
+            Jestem trenerką głosu, dyrygentką i aktywistką muzyczną. Od lat
+            pomagam ludziom rozwijać swoje umiejętności wokalne, pewność siebie
+            i czerpać radość ze śpiewu. Pracowałam z chórami, młodzieżą i
+            dorosłymi w Polsce i za granicą.
+          </p>
+          <p className="text-lg text-brand-sage mb-6 leading-relaxed">
+            Wierzę, że każdy ma w sobie unikalny głos, który warto odkryć i
+            pielęgnować. Moim celem jest stworzenie bezpiecznej i wspierającej
+            przestrzeni, gdzie każdy może rozwijać swoje umiejętności wokalne i
+            osobiste.
           </p>
 
           <h3 className="text-xl font-semibold mb-3 text-(--brand-green)">

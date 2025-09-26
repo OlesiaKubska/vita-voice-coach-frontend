@@ -40,7 +40,11 @@ export interface Service {
   description: string;
   shortDescription: string;
   icon?: string;
-  image?: string;
+  image?: {
+    url: string;
+    name?: string;
+    id?: number;
+  };
 }
 
 // Testimonial Types

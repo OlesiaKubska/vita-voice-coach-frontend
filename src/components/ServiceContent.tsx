@@ -7,6 +7,9 @@ import { Service } from "../lib/types";
 import { FaArrowLeft } from "react-icons/fa";
 
 export default function ServiceContent({ service }: { service: Service }) {
+  const imageUrl =
+    typeof service.image === "string" ? service.image : service.image?.url;
+
   return (
     <main className="max-w-3xl mx-auto py-20 px-6">
       <Link
@@ -16,6 +19,19 @@ export default function ServiceContent({ service }: { service: Service }) {
         <FaArrowLeft /> Powrót do oferty
       </Link>
 
+      {imageUrl && (
+        <div className="relative w-full h-80 mb-6">
+          <Image
+            src={`http://localhost:1337${imageUrl}`}
+            alt={service.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            className="object-cover rounded-lg"
+          />
+        </div>
+      )}
+
       <motion.h1
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,16 +40,6 @@ export default function ServiceContent({ service }: { service: Service }) {
       >
         {service.title}
       </motion.h1>
-
-      {service.image && (
-        <Image
-          src={service.image}
-          alt={service.title}
-          width={800}
-          height={400}
-          className="rounded-lg mb-6 object-cover"
-        />
-      )}
 
       <motion.article
         initial={{ opacity: 0 }}

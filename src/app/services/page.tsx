@@ -41,7 +41,11 @@ export default function ServicesPage() {
               shortDescription={service.description.slice(0, 120) + "..."}
               icon={service.icon || "FaStar"}
               slug={service.slug}
-              image={service.image}
+              image={
+                typeof service.image === "string"
+                  ? service.image
+                  : service.image?.url
+              }
             />
           </motion.div>
         ))}
