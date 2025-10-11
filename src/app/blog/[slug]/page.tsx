@@ -1,6 +1,6 @@
 import { getPosts } from "../../../lib/api";
 import { Post } from "../../../lib/types";
-import PostContent from "../../../components/PostContent";
+import PostContent from "../../../components/blog/PostContent";
 
 export async function generateStaticParams() {
   const posts: Post[] = await getPosts();

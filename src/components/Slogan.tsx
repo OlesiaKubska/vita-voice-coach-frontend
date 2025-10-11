@@ -12,7 +12,7 @@ export default function Slogan() {
       <h2
         className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text
         bg-gradient-to-r from-[var(--brand-rose)] via-[var(--brand-sage)] to-[var(--brand-green)]
-        animate-gradient-x italic tracking-wide"
+        animate-gradient-x italic tracking-wide leading-relaxed pb-1"
       >
         Twój głos jest Twoją siłą
       </h2>

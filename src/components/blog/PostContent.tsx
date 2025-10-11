@@ -3,8 +3,17 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "../lib/types";
+import { Post } from "../../lib/types";
 import { FaArrowLeft } from "react-icons/fa";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+function makeAbsolute(url?: string) {
+  if (!url) return "";
+  return url.startsWith("http") ? url : `${API_URL}${url}`;
+}
 
 export default function PostContent({ post }: { post: Post }) {
   const imageUrl =
@@ -45,7 +54,7 @@ export default function PostContent({ post }: { post: Post }) {
       {imageUrl && (
         <div className="relative w-full h-80 mb-6">
           <Image
-            src={`http://localhost:1337${imageUrl}`}
+            src={`${API_URL}${imageUrl}`}
             alt={post.title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -59,9 +68,34 @@ export default function PostContent({ post }: { post: Post }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="prose max-w-none"
+        className="prose prose-neutral lg:prose-lg max-w-none"
       >
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          // TODO: Sanitize HTML if using raw HTML in markdown
+          components={{
+            img: ({ src = "", alt }) => (
+              <Image
+                src={makeAbsolute(String(src))}
+                alt={alt ?? ""}
+                width={1200}
+                height={675}
+                className="rounded-lg"
+              />
+            ),
+            a: ({ href = "", children }) => (
+              <a
+                href={makeAbsolute(href)}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {children}
+              </a>
+            ),
+          }}
+        >
+          {post.content}
+        </ReactMarkdown>
       </motion.article>
     </>
   );

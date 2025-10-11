@@ -1,6 +1,6 @@
 "use client";
 
-import BlogCard from "../../components/BlogCard";
+import BlogCard from "../../components/blog/BlogCard";
 import { getPosts } from "../../lib/api";
 import { Post } from "../../lib/types";
 import { motion } from "framer-motion";

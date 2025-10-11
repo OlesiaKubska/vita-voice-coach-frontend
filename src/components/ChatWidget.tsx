@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { sendBotMessage } from "../lib/botApi";
 
 export default function ChatWidget() {
-  const [messages, setMessages] = useState<
-    { sender: "user" | "bot"; text: string }[]
-  >([]);
+  const [messages, setMessages] = useState<{ role: string; text: string }[]>(
+    []
+  );
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -43,35 +43,25 @@ export default function ChatWidget() {
     };
   }, []);
 
-  async function sendMessage() {
+  const handleSend = async () => {
     if (!input.trim()) return;
-
-    const userMessage: { sender: "user"; text: string } = {
-      sender: "user" as const,
-      text: input,
-    };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+    setMessages((prev) => [...prev, { role: "user", text: input }]);
     setLoading(true);
 
     try {
-      const reply = await sendBotMessage(input, "frontend-user");
-      const botMessage = {
-        sender: "bot" as const,
-        text: reply || "⚠️ Brak odpowiedzi",
-      };
-
-      setMessages((prev) => [...prev, botMessage]);
+      const res = await sendBotMessage(input, "frontend-user");
+      setMessages((prev) => [...prev, { role: "bot", text: res.reply }]);
     } catch (err) {
       console.error(err);
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "❌ Serwer niedostępny" },
+        { role: "bot", text: "❌ Serwer niedostępny" },
       ]);
     } finally {
       setLoading(false);
+      setInput("");
     }
-  }
+  };
 
   return (
     <>
@@ -121,24 +111,24 @@ export default function ChatWidget() {
               <div
                 key={i}
                 className={`flex items-end gap-2 ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
+                  msg.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
-                {msg.sender === "bot" && (
+                {msg.role === "bot" && (
                   <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-300 to-green-300 flex items-center justify-center text-white font-bold text-sm">
                     V
                   </div>
                 )}
                 <div
                   className={`px-3 py-2 rounded-lg max-w-[70%] text-sm ${
-                    msg.sender === "user"
+                    msg.role === "user"
                       ? "bg-(--brand-rose) text-white rounded-br-none"
                       : "bg-white text-(--brand-green) border border-(--brand-green)/20 rounded-bl-none"
                   }`}
                 >
                   {msg.text}
                 </div>
-                {msg.sender === "user" && (
+                {msg.role === "user" && (
                   <div className="w-8 h-8 rounded-full bg-(--brand-rose)/80 flex items-center justify-center text-white font-bold text-sm">
                     U
                   </div>
@@ -159,12 +149,12 @@ export default function ChatWidget() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
               className="flex-1 px-3 py-2 outline-none text-sm border border-gray-200 rounded-lg"
               placeholder="Napisz wiadomość..."
             />
             <button
-              onClick={sendMessage}
+              onClick={handleSend}
               className="ml-2 px-4 bg-(--brand-green) text-white rounded-lg hover:bg-(--brand-rose) transition"
             >
               ➤

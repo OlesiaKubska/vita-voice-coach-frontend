@@ -1,25 +1,25 @@
 import axios from "axios";
 
-const botApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BOT_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+export interface ChatResponse {
+  reply: string;
+}
 
-botApi.interceptors.request.use((config) => {
-  const token = process.env.NEXT_PUBLIC_API_TOKEN;
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+const BOT_URL = process.env.NEXT_PUBLIC_BOT_URL;
+const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
 
-export async function sendBotMessage(message: string, userId: string = "frontend-user") {
-  const res = await botApi.post(
-      "/chat",
-      { message, user_id: userId }
-  );
-
-  return res.data.reply;
+export async function sendBotMessage(
+  message: string,
+  userId: string = "frontend-user"): Promise<ChatResponse> {
+    const res = await axios.post<ChatResponse>(
+      `${BOT_URL}/chat`,
+      { message, user_id: userId },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_TOKEN}`,
+        },
+      }
+    );
+    console.log("Bot response:", res.data);
+    return res.data;
 }
