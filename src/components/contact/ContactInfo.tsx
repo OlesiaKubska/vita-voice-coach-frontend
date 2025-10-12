@@ -41,14 +41,17 @@ export default function ContactInfo() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg"
+          className="relative w-full h-[420px] md:h-[500px] lg:h-[560px] 
+             rounded-2xl overflow-hidden shadow-xl 
+             bg-(--brand-beige) dark:bg-(--brand-green)/20"
         >
           <Image
             src="/images/about/contact.jpg"
             alt="Vita Kociubajło – kontakt"
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
+            sizes="(min-width: 1024px) 560px, (min-width: 768px) 50vw, 100vw"
+            className="object-cover md:object-cover lg:object-top
+               rounded-2xl transition-transform duration-700 hover:scale-105"
             priority
           />
         </motion.div>
@@ -90,39 +93,38 @@ export default function ContactInfo() {
               )}
             </motion.div>
           ))}
-        </div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className="mt-12 flex flex-col sm:flex-row justify-center gap-4"
-      >
-        <motion.a
-          href="mailto:vkociubajlo@gmail.com"
-          aria-label="Wyślij email do Vita Kociubajło"
-          whileHover={{ scale: 1.04 }}
-          transition={{ type: "spring", stiffness: 200 }}
-          className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+            viewport={{ once: true }}
+            className="mt-12 flex flex-col sm:flex-row justify-center gap-4"
+          >
+            <motion.a
+              href="mailto:vkociubajlo@gmail.com"
+              aria-label="Wyślij email do Vita Kociubajło"
+              whileHover={{ scale: 1.04 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
                      hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) 
                      transition-colors duration-300 text-center"
-        >
-          Napisz do mnie
-        </motion.a>
+            >
+              Napisz do mnie
+            </motion.a>
 
-        <motion.a
-          href="tel:+48517522820"
-          aria-label="Zadzwoń teraz do Vita Kociubajło"
-          whileHover={{ scale: 1.04 }}
-          transition={{ type: "spring", stiffness: 200 }}
-          className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
+            <motion.a
+              href="tel:+48517522820"
+              aria-label="Zadzwoń teraz do Vita Kociubajło"
+              whileHover={{ scale: 1.04 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md 
                      hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
-        >
-          Zadzwoń teraz
-        </motion.a>
-      </motion.div>
+            >
+              Zadzwoń teraz
+            </motion.a>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

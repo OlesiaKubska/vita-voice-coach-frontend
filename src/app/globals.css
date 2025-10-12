@@ -3,6 +3,7 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
+/* LIGHT (default) */
 :root {
   --background: #F6F2EE;
   --foreground: #214424;
@@ -11,14 +12,21 @@
   --brand-rose: #D96689;
   --brand-beige: #F6F2EE;
   --brand-sage: #798478;
+
+  color-scheme: light;
 }
 
 /* dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html.dark :root {
+  --background: #0a0a0a;         
+  --foreground: #ededed;
+
+  --brand-green: #dfe7df;       
+  --brand-rose:  #f0a8bf;
+  --brand-beige: #1b1b1b;
+  --brand-sage:  #b9c0b9;
+
+  color-scheme: dark;
 }
 
 body {

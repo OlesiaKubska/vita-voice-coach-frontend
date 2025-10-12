@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import ThemeToggle from "@/components/layout/ThemeToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,6 +22,8 @@ export default function Navbar() {
           Vita Voice
         </span>
       </Link>
+
+      <ThemeToggle />
 
       {/* Desktop menu */}
       <div className="hidden md:flex space-x-6 text-(--brand-green) font-medium">

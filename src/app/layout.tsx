@@ -34,10 +34,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const initTheme = `
+    try {
+      const saved = localStorage.getItem("theme");
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const enableDark = saved ? saved === "dark" : systemDark;
+      document.documentElement.classList.toggle("dark", enableDark);
+    } catch (e) {}
+  `;
+
   return (
     <html lang="pl" data-scroll-behavior="smooth">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: initTheme }} />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased
+              bg-[var(--background)] text-[var(--foreground)]
+              transition-colors duration-300`}
       >
         <Slogan />
         <Navbar />

@@ -71,7 +71,7 @@ export default function BlogCard({
           </ReactMarkdown>
         </div>
         <Link
-          href={`/blog/${slug}`}
+          href={slug ? `/blog/${slug}` : "#"}
           className="inline-flex items-center text-(--brand-rose) font-medium hover:underline"
         >
           Czytaj więcej <FaArrowRight className="ml-2" />
