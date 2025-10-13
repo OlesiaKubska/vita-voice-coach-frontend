@@ -1,4 +1,4 @@
-import ServiceContent from "@/components/ServiceContent";
+import ServiceContent from "@/components/services/ServiceContent";
 import { getServices } from "../../../lib/api";
 import { Service } from "../../../lib/types";
 

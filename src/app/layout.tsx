@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -29,22 +30,35 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const initTheme = `
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get("theme")?.value;
+  const initialClass = themeCookie === "dark" ? "dark" : "";
+
+  const initTheme = `(function() {
     try {
-      const saved = localStorage.getItem("theme");
+      const saved = localStorage.getItem("theme") || ${JSON.stringify(
+        themeCookie ?? ""
+      )};
       const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       const enableDark = saved ? saved === "dark" : systemDark;
-      document.documentElement.classList.toggle("dark", enableDark);
+      const doc = document.documentElement;
+      if (enableDark) doc.classList.add("dark");
+      else doc.classList.remove("dark");
     } catch (e) {}
-  `;
+  })()`;
 
   return (
-    <html lang="pl" data-scroll-behavior="smooth">
+    <html
+      lang="pl"
+      data-scroll-behavior="smooth"
+      className={initialClass}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: initTheme }} />
       </head>
@@ -55,7 +69,7 @@ export default function RootLayout({
       >
         <Slogan />
         <Navbar />
-        <main className="">{children}</main>
+        <main>{children}</main>
         <ScrollToTop />
         <ChatWidget />
         <Footer />

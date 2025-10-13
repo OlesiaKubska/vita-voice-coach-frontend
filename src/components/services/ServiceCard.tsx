@@ -15,6 +15,8 @@ interface ServiceCardProps {
   slug: string;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function ServiceCard({
   title,
   shortDescription,
@@ -32,7 +34,7 @@ export default function ServiceCard({
         {image && (
           <div className="relative w-full h-48 mb-4">
             <Image
-              src={`http://localhost:1337${image}`}
+              src={`${API_URL}${image}`}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

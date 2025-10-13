@@ -17,7 +17,7 @@
 }
 
 /* dark mode */
-html.dark :root {
+html.dark {
   --background: #0a0a0a;         
   --foreground: #ededed;
 

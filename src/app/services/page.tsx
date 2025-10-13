@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ServiceCard from "../../components/ServiceCard";
+import ServiceCard from "@/components/services/ServiceCard";
 import { getServices } from "../../lib/api";
 import { Service } from "../../lib/types";
 import { motion } from "framer-motion";

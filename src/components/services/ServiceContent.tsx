@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Service } from "../lib/types";
+import { Service } from "../../lib/types";
 import { FaArrowLeft } from "react-icons/fa";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function ServiceContent({ service }: { service: Service }) {
   const imageUrl =
@@ -22,7 +24,7 @@ export default function ServiceContent({ service }: { service: Service }) {
       {imageUrl && (
         <div className="relative w-full h-80 mb-6">
           <Image
-            src={`http://localhost:1337${imageUrl}`}
+            src={`${API_URL}${imageUrl}`}
             alt={service.title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"

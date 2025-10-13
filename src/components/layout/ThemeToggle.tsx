@@ -13,22 +13,26 @@ export default function ThemeToggle() {
 
   if (!mounted) return null;
 
-  const toggle = () => {
-    const next = !dark;
-    setDark(next);
+  const toggle = (next: boolean) => {
     document.documentElement.classList.toggle("dark", next);
     localStorage.setItem("theme", next ? "dark" : "light");
+    document.cookie = `theme=${
+      next ? "dark" : "light"
+    }; path=/; max-age=31536000; samesite=lax`;
   };
 
   return (
     <button
-      onClick={toggle}
+      onClick={() => {
+        const next = !dark;
+        setDark(next);
+        toggle(next);
+      }}
       className="px-3 py-2 rounded-md transition
                  bg-[var(--brand-rose)] text-white
                  hover:opacity-90
                  dark:bg-[var(--brand-beige)] dark:text-[var(--brand-green)]"
       aria-pressed={dark}
-      title={dark ? "Jasny motyw" : "Ciemny motyw"}
     >
       {dark ? "☀️ Jasny" : "🌙 Ciemny"}
     </button>
