@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Posts
 export async function getPosts(): Promise<Post[]> {
-  const res = await axios.get<StrapiResponse<Post>>(`${API_URL}/api/posts?populate=*`);
+  const res = await axios.get<StrapiResponse<Post>>(`${API_URL}/api/posts?populate=*&sort=publishedAt:desc`);
 
   return res.data.data;
 }

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function ContactForm() {
   return (
-    <section className="max-w-2xl mx-auto my-20 p-8 bg-(--brand-beige) text-(--brand-green) rounded-xl shadow-lg">
+    <section className="max-w-2xl mx-auto my-20 p-8 bg-(--brand-rose)/10 text-(--brand-green) rounded-xl shadow-lg">
       <h2 className="text-3xl font-extrabold mb-8 text-center text-(--brand-green)">
         Skontaktuj się ze mną
       </h2>

@@ -5,6 +5,7 @@ import Image from "next/image";
 import * as FaIcons from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
+import { makeAbsolute, buildExcerpt } from "@/lib/utils";
 
 interface ServiceCardProps {
   id?: number;
@@ -15,8 +16,6 @@ interface ServiceCardProps {
   slug: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export default function ServiceCard({
   title,
   shortDescription,
@@ -26,15 +25,26 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   const Icon: IconType =
     FaIcons[icon as keyof typeof FaIcons] || FaIcons.FaStar;
+  const imgSrc = image ? makeAbsolute(image) : "";
+  const preview = buildExcerpt(shortDescription, 200);
 
   return (
     <div className="relative group">
-      <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition duration-500 blur-2xl bg-gradient-to-r from-(--brand-green) via-(--brand-sage) to-(--brand-rose)/60 animate-pulse"></div>
-      <div className="relative h-full border border-(--brand-rose)/30 rounded-lg p-6 shadow-md bg-white/80 backdrop-blur-sm hover:shadow-xl hover:-translate-y-1 transition transform flex flex-col justify-between">
-        {image && (
+      <div
+        className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100
+                        transition duration-500 blur-2xl bg-gradient-to-r from-[var(--brand-green)] 
+                        via-[var(--brand-sage)] to-[var(--brand-rose)]/60 animate-pulse
+                        dark:bg-[var(--brand-beige)]/5 dark:border-[var(--brand-rose)]/30"
+      ></div>
+      <div
+        className="relative border border-[var(--brand-rose)]/20 rounded-lg p-6 shadow-md
+                      bg-[var(--brand-beige)]/90 backdrop-blur-sm
+                      hover:shadow-xl hover:-translate-y-1 transition"
+      >
+        {imgSrc && (
           <div className="relative w-full h-48 mb-4">
             <Image
-              src={`${API_URL}${image}`}
+              src={imgSrc}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -43,16 +53,22 @@ export default function ServiceCard({
             />
           </div>
         )}
+
         <div className="flex items-center gap-3 mb-4">
-          <Icon className="text-3xl text-(--brand-rose)" />
-          <h3 className="text-xl font-semibold text-(--brand-green)">
+          <Icon className="text-3xl text-[var(--brand-rose)]" />
+          <h3 className="text-xl font-semibold text-[var(--brand-green)]">
             {title}
           </h3>
         </div>
-        <p className="text-(--brand-sage) mb-4">{shortDescription}</p>
+
+        <p className="text-[var(--brand-sage)] mb-4 line-clamp-3 leading-relaxed">
+          {preview}
+        </p>
+
         <Link
           href={`/services/${slug}`}
-          className="inline-flex items-center text-(--brand-rose) font-medium hover:underline"
+          className="inline-flex items-center text-[var(--brand-rose)] font-medium hover:underline"
+          aria-label={`Dowiedz się więcej: ${title}`}
         >
           Dowiedz się więcej <FaArrowRight className="ml-2" />
         </Link>

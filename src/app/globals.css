@@ -44,6 +44,12 @@ body {
   }
 }
 
+@layer utilities {
+  .flow-headings h2 { margin-top: 2.25rem; margin-bottom: .75rem; scroll-margin-top: 6rem; }
+  .flow-headings h3 { margin-top: 1.75rem; margin-bottom: .5rem; scroll-margin-top: 6rem; }
+  .flow-headings hr  { margin: 1.5rem 0; opacity: .5; }
+}
+
 .animate-gradient-x {
   background-size: 200% 200%;
   animation: gradient-x 6s ease-in-out infinite;

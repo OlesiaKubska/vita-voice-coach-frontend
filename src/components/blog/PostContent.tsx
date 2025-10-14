@@ -7,26 +7,24 @@ import { Post } from "../../lib/types";
 import { FaArrowLeft } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
-function makeAbsolute(url?: string) {
-  if (!url) return "";
-  return url.startsWith("http") ? url : `${API_URL}${url}`;
-}
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { makeAbsolute, formatDate } from "@/lib/utils";
+import TableOfContents from "@/components/blog/TableOfContents";
 
 export default function PostContent({ post }: { post: Post }) {
   const imageUrl =
     typeof post.coverImage === "string"
       ? post.coverImage
       : post.coverImage?.url;
+  const coverUrl = makeAbsolute(imageUrl);
 
   return (
     <>
       <div className="sticky top-0 backdrop-blur-sm py-3 z-50 mb-4">
         <Link
           href="/blog"
-          className="inline-flex items-center text-(--brand-rose) font-medium hover:underline"
+          className="inline-flex items-center text-[var(--brand-rose)] font-medium hover:underline"
         >
           <FaArrowLeft className="mr-2" /> Wróć do bloga
         </Link>
@@ -36,43 +34,48 @@ export default function PostContent({ post }: { post: Post }) {
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-4xl font-bold mb-6"
+        className="text-4xl font-bold mb-3 text-[var(--brand-green)]"
       >
         {post.title}
       </motion.h1>
 
-      <div className="text-sm text-gray-500 mb-4">
-        <p>
-          Opublikowano: {new Date(post.publishedAt).toLocaleDateString("pl-PL")}
-        </p>
-        <p>
-          Ostatnia aktualizacja:{" "}
-          {new Date(post.updatedAt).toLocaleDateString("pl-PL")}
-        </p>
+      <div className="text-sm text-[var(--brand-sage)]/90 mb-6">
+        <p>Opublikowano: {formatDate(post.publishedAt)}</p>
+        <p>Ostatnia aktualizacja: {formatDate(post.updatedAt)}</p>
       </div>
 
-      {imageUrl && (
-        <div className="relative w-full h-80 mb-6">
+      {coverUrl && (
+        <div className="relative w-full h-56 md:h-[28rem] lg:h-[32rem] mb-6">
           <Image
-            src={`${API_URL}${imageUrl}`}
+            src={coverUrl}
             alt={post.title}
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1200px"
             priority
             className="object-cover rounded-lg"
           />
         </div>
       )}
 
+      <TableOfContents />
+
       <motion.article
+        data-post-content
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="prose prose-neutral lg:prose-lg max-w-none"
+        transition={{ delay: 0.15 }}
+        className="
+            prose prose-brand lg:prose-lg max-w-none
+            dark:prose-invert flow-headings
+            leading-relaxed
+          "
       >
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          // TODO: Sanitize HTML if using raw HTML in markdown
+          rehypePlugins={[
+            rehypeSlug,
+            [rehypeAutolinkHeadings, { behavior: "wrap" }],
+          ]}
           components={{
             img: ({ src = "", alt }) => (
               <Image
@@ -80,9 +83,12 @@ export default function PostContent({ post }: { post: Post }) {
                 alt={alt ?? ""}
                 width={1200}
                 height={675}
+                sizes="100vw"
                 className="rounded-lg"
+                loading="lazy"
               />
             ),
+
             a: ({ href = "", children }) => (
               <a
                 href={makeAbsolute(href)}
