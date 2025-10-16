@@ -40,6 +40,9 @@ export interface Service {
   description: string;
   shortDescription: string;
   icon?: string;
+  category: "warsztaty" | "lekcje" | "kursy-online" | "wystapienia" | "rozwoj-osobisty" | "nagrania";
+  mode?: ("online" | "stacjonarnie")[];
+  audience?: ("kobiety" | "mlodziez" | "korporacje")[];
   image?: {
     url: string;
     name?: string;
@@ -75,4 +78,10 @@ id: number;
     url: string;
   };
   publishedAt: string;
+}
+
+export interface MessageData {
+  name: string;
+  email: string;
+  message: string;
 }

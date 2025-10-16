@@ -6,15 +6,12 @@ import * as FaIcons from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 import { makeAbsolute, buildExcerpt } from "@/lib/utils";
+import type { Service } from "@/lib/types";
 
-interface ServiceCardProps {
-  id?: number;
-  title: string;
-  shortDescription: string;
-  icon: string;
-  image?: string;
-  slug: string;
-}
+type ServiceCardProps = Pick<
+  Service,
+  "id" | "title" | "shortDescription" | "slug" | "icon" | "image"
+>;
 
 export default function ServiceCard({
   title,
@@ -24,8 +21,9 @@ export default function ServiceCard({
   image,
 }: ServiceCardProps) {
   const Icon: IconType =
-    FaIcons[icon as keyof typeof FaIcons] || FaIcons.FaStar;
-  const imgSrc = image ? makeAbsolute(image) : "";
+    (icon && FaIcons[icon as keyof typeof FaIcons]) || FaIcons.FaStar;
+
+  const imgSrc = image?.url ? makeAbsolute(image.url) : undefined;
   const preview = buildExcerpt(shortDescription, 200);
 
   return (
