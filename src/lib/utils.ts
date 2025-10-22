@@ -3,7 +3,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 /** Makes a URL absolute (e.g., from Strapi) */
 export function makeAbsolute(url?: string): string {
   if (!url) return "";
-  return url.startsWith("http") ? url : `${API_URL}${url}`;
+  if (/^https?:\/\//i.test(url)) return url;
+  return API_URL.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
+  // return url.startsWith("http") ? url : `${API_URL}${url}`;
 }
 
 /** Format date */

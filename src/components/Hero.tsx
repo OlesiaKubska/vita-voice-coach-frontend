@@ -7,15 +7,32 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col md:flex-row items-center justify-center px-6 py-12"
+      className="relative min-h-screen overflow-hidden flex flex-col md:flex-row items-center justify-center px-6 py-12"
+      aria-label="Sekcja główna strony"
     >
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        aria-hidden
+        className="absolute inset-0 z-0 bg-cover bg-center"
         style={{ backgroundImage: "url('/images/hero/group-hero.webp')" }}
       />
-      <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-center w-full">
+      <div
+        aria-hidden
+        className="absolute inset-0 z-10 bg-white/80 dark:bg-black/60 backdrop-blur-md"
+      />
+
+      <div
+        aria-hidden
+        className="absolute inset-y-0 right-0 w-[70%] max-w-[880px] z-[12]
+                   bg-gradient-to-l from-white/90 via-white/60 to-transparent dark:hidden"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-y-0 left-0 w-[70%] max-w-[880px] z-[12]
+                   hidden dark:block bg-gradient-to-r from-black/80 via-black/60 to-transparent"
+      />
+
+      <div className="relative z-20 flex flex-col md:flex-row items-center justify-center w-full">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -26,7 +43,8 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
-            className="inline-block mb-4 px-4 py-1 text-sm bg-(--brand-rose) text-(--brand-beige) rounded-full"
+            className="inline-block mb-4 px-4 py-1 text-sm bg-[var(--brand-rose)] text-[var(--brand-beige)] rounded-full
+             shadow-sm shadow-black/10 italic"
           >
             Vita – kobieta wielu wymiarów
           </motion.span>
@@ -35,7 +53,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight text-(--brand-green)"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 leading-tight text-[var(--brand-green)]"
           >
             Trenerka Głosu i Pewności Siebie
           </motion.h1>
@@ -44,7 +62,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 1 }}
-            className="text-base sm:text-lg md:text-xl mb-6 text-(--brand-green)"
+            className="text-base sm:text-lg md:text-xl mb-6 text-[var(--brand-green)]"
           >
             Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i
             umiejętności wystąpień publicznych – w śpiewie i w życiu codziennym.
@@ -63,8 +81,9 @@ export default function Hero() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow 
-               hover:bg-(--brand-beige) hover:shadow-2xl hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
+                className="px-6 py-3 bg-[var(--brand-rose)] text-[var(--brand-beige)] font-medium rounded-md shadow 
+                        hover:bg-[var(--brand-beige)] hover:shadow-2xl hover:border hover:border-[var(--brand-rose)] 
+                        hover:text-[var(--brand-rose)] transition-colors duration-300 text-center"
               >
                 Moja Oferta
               </motion.div>
@@ -75,8 +94,10 @@ export default function Hero() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md
-               hover:bg-(--brand-rose) hover:shadow-2xl hover:text-(--brand-beige) transition-colors duration-300 text-center"
+                className="px-6 py-3 bg-[var(--brand-beige)] border border-[var(--brand-rose)] 
+                        text-[var(--brand-rose)] font-medium rounded-md
+                        hover:bg-[var(--brand-rose)] hover:shadow-2xl 
+                        hover:text-[var(--brand-beige)] transition-colors duration-300 text-center"
               >
                 Umów się na konsultację
               </motion.div>

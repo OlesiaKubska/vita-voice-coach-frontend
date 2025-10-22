@@ -81,3 +81,15 @@ body {
   font-size: 24px;
   font-weight: bold;
 }
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .bg-radial {
+    background: radial-gradient(600px circle at var(--x,50%) var(--y,50%), var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+}

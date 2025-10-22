@@ -30,14 +30,19 @@ const categories = [
 
 export default function OfertaPreview() {
   return (
-    <section className="py-20 bg-(--brand-beige)">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative overflow-hidden py-20 bg-[var(--brand-beige)]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden dark:block bg-grid opacity-40"
+      />
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold mb-12 text-(--brand-green) flex justify-center items-center gap-3 text-center"
+          className="text-4xl font-bold mb-12 text-[var(--brand-green)] 
+                    flex justify-center items-center gap-3 text-center"
         >
           Moja oferta
         </motion.h2>
@@ -65,12 +70,12 @@ export default function OfertaPreview() {
                 transition={{ duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center justify-center gap-2 
-                        rounded-full bg-white/80 text-(--brand-green) 
-                        border border-(--brand-rose) 
-                        font-medium px-5 py-2 cursor-default w-48
+                        rounded-full bg-[var(--brand-rose)]/10 text-[var(--brand-green)] 
+                        border border-[var(--brand-rose)] 
+                        font-medium px-5 py-2 cursor-default w-48 shadow-md
                         transition-all duration-300
-                        hover:text-white 
-                        hover:bg-gradient-to-r 
+                        dark:bg-[var(--brand-beige)]/5 dark:border-[var(--brand-rose)]/30
+                        dark:hover:text-black hover:bg-gradient-to-r 
                         hover:from-pink-300 hover:via-green-200 hover:to-green-300
                         bg-[length:200%_200%] hover:animate-gradient-x
                         hover:shadow-[0_0_15px_rgba(244,114,182,0.5),0_0_25px_rgba(134,239,172,0.5)]"
@@ -90,11 +95,12 @@ export default function OfertaPreview() {
               <Link
                 href="/services"
                 className="inline-flex items-center font-medium px-6 py-3 
-                           rounded-md shadow-lg
-                           bg-gradient-to-r from-pink-300 via-green-200 to-green-300 text-(--brand-green)
-                           hover:text-white bg-[length:200%_200%] animate-gradient-x
+                           rounded-md shadow-lg dark:text-black
+                           bg-gradient-to-r from-pink-300 via-green-200 to-green-300 text-[var(--brand-green)]
+                           bg-[length:200%_200%] animate-gradient-x
                            hover:shadow-[0_0_15px_rgba(244,114,182,0.5),0_0_25px_rgba(134,239,172,0.5)]
-                           transition-all duration-300"
+                           transition-all duration-300
+                           "
               >
                 Zobacz całą ofertę <FaArrowRight className="ml-2" />
               </Link>
@@ -116,28 +122,28 @@ export default function OfertaPreview() {
             {[
               {
                 icon: (
-                  <FaMicrophone className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
+                  <FaMicrophone className="text-3xl text-[var(--brand-green)] dark:text-black hover:text-white transition-colors duration-300" />
                 ),
                 number: "500",
                 label: "Godzin pracy indywidualnej z klientami",
               },
               {
                 icon: (
-                  <FaUsers className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
+                  <FaUsers className="text-3xl text-[var(--brand-green)] dark:text-black hover:text-white transition-colors duration-300" />
                 ),
                 number: "250",
                 label: "Warsztatów dla kobiet",
               },
               {
                 icon: (
-                  <FaMusic className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
+                  <FaMusic className="text-3xl text-[var(--brand-green)] dark:text-black hover:text-white transition-colors duration-300" />
                 ),
                 number: "758",
                 label: "Godzin nagrań",
               },
               {
                 icon: (
-                  <FaCalendarAlt className="text-3xl text-(--brand-green) hover:text-white transition-colors duration-300" />
+                  <FaCalendarAlt className="text-3xl text-[var(--brand-green)] dark:text-black hover:text-white transition-colors duration-300" />
                 ),
                 number: "25",
                 label: "Lat doświadczenia",
@@ -151,12 +157,15 @@ export default function OfertaPreview() {
                 }}
                 transition={{ duration: 0.6 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-white/80 shadow-lg rounded-2xl p-8 hover:shadow-2xl transition flex flex-col items-center"
+                className="bg-[var(--brand-rose)/10] shadow-lg border border-[var(--brand-rose)]/30 dark:bg-[var(--brand-beige)]/5 
+                        dark:border-[var(--brand-rose)]/30 rounded-2xl p-8 hover:shadow-2xl 
+                        transition flex flex-col items-center"
               >
                 <div
-                  className="w-16 h-16 flex items-center justify-center rounded-xl 
+                  className="w-16 h-16 flex items-center justify-center rounded-xl
                       bg-gradient-to-r from-pink-300 via-green-200 to-green-300 
-                      bg-[length:200%_200%] animate-gradient-x shadow-md mb-4"
+                      bg-[length:200%_200%] animate-gradient-x shadow-md mb-4
+                      hover:shadow-[0_0_15px_rgba(244,114,182,0.5),0_0_25px_rgba(134,239,172,0.5)]"
                 >
                   {item.icon}
                 </div>
@@ -164,7 +173,7 @@ export default function OfertaPreview() {
                 <h3 className="text-3xl font-bold text-(--brand-green)">
                   {item.number}
                 </h3>
-                <p className="text-(--brand-sage) text-lg">{item.label}</p>
+                <p className="text-[var(--brand-sage)] text-lg">{item.label}</p>
               </motion.div>
             ))}
           </motion.div>

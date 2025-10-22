@@ -6,8 +6,11 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-import { getTestimonials } from "../lib/api";
-import { Testimonial } from "../lib/types";
+import { getTestimonials } from "@/lib/api";
+import { Testimonial } from "@/lib/types";
+// import { makeAbsolute } from "@/lib/utils";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export default function TestimonialsSection() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -56,9 +59,16 @@ export default function TestimonialsSection() {
             const initial = author.charAt(0).toUpperCase();
             const text = t.text || "Brak opinii";
             const rating = t.rating || 0;
-            const photoUrl = t.photo?.url
-              ? `http://localhost:1337${t.photo.url}`
-              : null;
+            const raw = t.photo?.url || "";
+
+            const photoUrl =
+              raw && (raw.startsWith("http://") || raw.startsWith("https://"))
+                ? raw
+                : raw
+                ? `${API_URL}${raw}`
+                : "";
+
+            const hasPhoto = !!photoUrl;
 
             return (
               <SwiperSlide key={t.id}>
@@ -70,7 +80,7 @@ export default function TestimonialsSection() {
                   whileHover={{ scale: 1.05 }}
                   className="bg-white/80 shadow-lg rounded-2xl p-8 flex flex-col items-center text-center min-h-[350px]"
                 >
-                  {photoUrl ? (
+                  {hasPhoto ? (
                     <div className="w-20 h-20 mb-4 relative">
                       <Image
                         src={photoUrl}

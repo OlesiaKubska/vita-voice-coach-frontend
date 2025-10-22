@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vita Kociubajło – Trenerka głosu i śpiewu",
+  title: "Vita Kociubajło – Trenerka głosu i pewności siebie",
   description:
     "Lekcje śpiewu, rozwój głosu i przygotowanie do wystąpień publicznych. Pomagam kobietom i młodzieży rozwijać głos, pewność siebie i umiejętności komunikacyjne.",
 
@@ -36,7 +36,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  const themeCookie = cookieStore.get("theme")?.value;
+  const themeCookie = cookieStore.get("theme")?.value as
+    | "dark"
+    | "light"
+    | undefined;
   const initialClass = themeCookie === "dark" ? "dark" : "";
 
   const initTheme = `(function() {
@@ -60,6 +63,7 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="color-scheme" content="light dark" />
         <script dangerouslySetInnerHTML={{ __html: initTheme }} />
       </head>
       <body
