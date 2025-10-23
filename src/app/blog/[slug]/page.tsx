@@ -3,19 +3,36 @@ import { getPosts } from "../../../lib/api";
 import { Post } from "../../../lib/types";
 import PostContent from "@/components/blog/PostContent";
 
+function getPostSlug(post: Post): string | null {
+  if ("slug" in post && typeof post.slug === "string") {
+    return post.slug;
+  }
+  if (
+    "attributes" in post &&
+    post.attributes &&
+    "slug" in post.attributes &&
+    typeof post.attributes.slug === "string"
+  ) {
+    return post.attributes.slug;
+  }
+  return null;
+}
+
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   try {
     const posts: Post[] = await getPosts();
 
-    type PostLike = { slug?: string; attributes?: { slug?: string } };
+    if (!Array.isArray(posts)) {
+      console.error(
+        "[generateStaticParams] getPosts did not return an array:",
+        posts
+      );
+      return [];
+    }
 
-    const list = (posts || [])
+    const list = posts
       .map((post) => {
-        const raw =
-          (post as PostLike)?.slug ??
-          (post as PostLike)?.attributes?.slug ??
-          "";
-        const slug = typeof raw === "string" ? raw : String(raw || "");
+        const slug = getPostSlug(post);
         return slug ? { slug } : null;
       })
       .filter(Boolean) as Array<{ slug: string }>;
@@ -33,24 +50,22 @@ export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
 export default async function BlogPostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }) {
-  const { slug } = await params;
+  const { slug } = params;
 
   let posts: Post[] = [];
   try {
     posts = await getPosts();
+    if (!Array.isArray(posts)) {
+      console.error("[BlogPostPage] getPosts did not return an array:", posts);
+      posts = [];
+    }
   } catch (e) {
     console.error("[BlogPostPage] getPosts failed:", e);
   }
 
-  type PostLike = { slug?: string; attributes?: { slug?: string } };
-  const post = posts.find((p): p is Post => {
-    const raw =
-      (p as PostLike)?.slug ?? (p as PostLike)?.attributes?.slug ?? "";
-    const s = typeof raw === "string" ? raw : String(raw || "");
-    return s === slug;
-  });
+  const post = posts.find((p) => getPostSlug(p) === slug);
 
   if (!post) {
     notFound();
@@ -58,7 +73,7 @@ export default async function BlogPostPage({
 
   return (
     <main className="max-w-3xl mx-auto py-20 px-4">
-      <PostContent post={post as Post} />
+      <PostContent post={post} />
     </main>
   );
 }
