@@ -2,7 +2,7 @@ import ServiceContent from "@/components/services/ServiceContent";
 import { getServices } from "../../../lib/api";
 import { Service } from "../../../lib/types";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   const services: Service[] = await getServices();
   return services.map((service) => ({ slug: service.slug }));
 }
@@ -10,7 +10,7 @@ export async function generateStaticParams() {
 export default async function ServicePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
   const services: Service[] = await getServices();

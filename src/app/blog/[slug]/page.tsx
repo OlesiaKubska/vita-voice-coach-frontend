@@ -2,24 +2,25 @@ import { getPosts } from "../../../lib/api";
 import { Post } from "../../../lib/types";
 import PostContent from "@/components/blog/PostContent";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   const posts: Post[] = await getPosts();
+
+  type PostLike = { slug?: string; attributes?: { slug?: string } };
 
   return posts
     .map((post) => {
-      type PostLike = { slug?: string; attributes?: { slug?: string } };
       const raw =
         (post as PostLike)?.slug ?? (post as PostLike)?.attributes?.slug ?? "";
       const slug = typeof raw === "string" ? raw : String(raw || "");
       return slug ? { slug } : null;
     })
-    .filter(Boolean) as { slug: string }[];
+    .filter(Boolean) as Array<{ slug: string }>;
 }
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
 
