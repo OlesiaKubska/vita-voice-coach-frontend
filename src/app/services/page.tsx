@@ -22,7 +22,7 @@ export default function ServicesPage() {
   }, []);
 
   return (
-    <main className="py-20 bg-[var(--brand-rose)/5]">
+    <main className="py-20 bg-[var(--brand-rose)]/5">
       <motion.h1
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function ServicesPage() {
           Poznaj ofertę VitaVoice – warsztaty, lekcje i kursy, które pomogą Ci
           odzyskać kontakt ze swoim głosem, odwagą i autentycznością.
         </p>
-        <p className="mt-2 font-semibold text-[var(--brand-rose)]">
+        <p className="mt-2 font-semibold text-[var(--brand-rose)] uppercase">
           Twój głos jest Twoją siłą.
         </p>
       </motion.div>

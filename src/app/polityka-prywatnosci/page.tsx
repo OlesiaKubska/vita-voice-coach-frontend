@@ -4,9 +4,9 @@ import React from "react";
 
 export default function PolitykaPrywatnosci() {
   return (
-    <div className="max-w-3xl mx-auto p-6 text-gray-800 leading-relaxed">
+    <div className="max-w-3xl mx-auto p-6 text-[var(--brand-green)] leading-relaxed">
       <h1 className="text-3xl font-bold mb-6">
-        Polityka Prywatności – Vita Voice Coach
+        Polityka Prywatności – Vita Voice
       </h1>
 
       <p className="mb-4">Data obowiązywania: 01.09.2025</p>
@@ -15,10 +15,13 @@ export default function PolitykaPrywatnosci() {
         1. Administrator danych
       </h2>
       <p>
-        Administratorem danych osobowych jest <b>Vita Voice Coach</b> <br />
-        Adres: ul.Antoniuk Fabryczny 13, 15-762 Białystok <br />
+        Administratorem danych osobowych jest <b>Vita Wirynieja Kociubajlo</b>
+        <br />
+        Adres: ul.Antoniuk Fabryczny 13/9, 15-762 Białystok <br />
         E-mail: vkociubajlo@gmail.com <br />
-        Telefon: +48517522820
+        Telefon: +48517522820 <br />
+        NIP: 5432054784 <br />
+        REGON: 369333307
       </p>
 
       <h2 className="text-2xl font-semibold mt-6 mb-2">

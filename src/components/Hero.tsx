@@ -18,18 +18,7 @@ export default function Hero() {
 
       <div
         aria-hidden
-        className="absolute inset-0 z-10 bg-white/80 dark:bg-black/60 backdrop-blur-md"
-      />
-
-      <div
-        aria-hidden
-        className="absolute inset-y-0 right-0 w-[70%] max-w-[880px] z-[12]
-                   bg-gradient-to-l from-white/90 via-white/60 to-transparent dark:hidden"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-y-0 left-0 w-[70%] max-w-[880px] z-[12]
-                   hidden dark:block bg-gradient-to-r from-black/80 via-black/60 to-transparent"
+        className="absolute inset-0 z-10 bg-[var(--brand-beige)]/60 backdrop-blur-md"
       />
 
       <div className="relative z-20 flex flex-col md:flex-row items-center justify-center w-full">
@@ -105,7 +94,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Image */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}

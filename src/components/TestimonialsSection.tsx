@@ -5,10 +5,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-
 import { getTestimonials } from "@/lib/api";
 import { Testimonial } from "@/lib/types";
-// import { makeAbsolute } from "@/lib/utils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -28,14 +26,18 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section className="py-20 bg-(--brand-beige)">
+    <section className="py-20 bg-[var(--brand-beige)] overflow-hidden relative">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden dark:block bg-grid opacity-40"
+      />
       <div className="max-w-4xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-4xl font-bold mb-12 text-(--brand-green) text-center"
+          className="text-4xl font-bold mb-12 text-[var(--brand-green)] text-center"
         >
           Opinie klientów
         </motion.h2>
@@ -78,7 +80,7 @@ export default function TestimonialsSection() {
                   transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
                   whileHover={{ scale: 1.05 }}
-                  className="bg-white/80 shadow-lg rounded-2xl p-8 flex flex-col items-center text-center min-h-[350px]"
+                  className="bg-[var(--brand-rose)]/10 shadow-lg rounded-2xl p-8 flex flex-col items-center text-center min-h-[350px]"
                 >
                   {hasPhoto ? (
                     <div className="w-20 h-20 mb-4 relative">
@@ -96,11 +98,11 @@ export default function TestimonialsSection() {
                     </div>
                   )}
 
-                  <p className="text-(--brand-green) italic mb-4">
+                  <p className="text-[var(--brand-green)] italic mb-4">
                     {`"${text}"`}
                   </p>
 
-                  <h3 className="font-semibold text-(--brand-rose)">
+                  <h3 className="font-semibold text-[var(--brand-rose)]">
                     {author}
                   </h3>
 

@@ -70,11 +70,11 @@ export default function OfertaPreview() {
                 transition={{ duration: 0.5 }}
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center justify-center gap-2 
-                        rounded-full bg-[var(--brand-rose)]/10 text-[var(--brand-green)] 
-                        border border-[var(--brand-rose)] 
+                        rounded-full text-[var(--brand-green)] 
+                        border border-[var(--brand-rose)]/30 
                         font-medium px-5 py-2 cursor-default w-48 shadow-md
                         transition-all duration-300
-                        dark:bg-[var(--brand-beige)]/5 dark:border-[var(--brand-rose)]/30
+                        bg-[var(--brand-rose)]/10
                         dark:hover:text-black hover:bg-gradient-to-r 
                         hover:from-pink-300 hover:via-green-200 hover:to-green-300
                         bg-[length:200%_200%] hover:animate-gradient-x
@@ -157,8 +157,8 @@ export default function OfertaPreview() {
                 }}
                 transition={{ duration: 0.6 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-[var(--brand-rose)/10] shadow-lg border border-[var(--brand-rose)]/30 dark:bg-[var(--brand-beige)]/5 
-                        dark:border-[var(--brand-rose)]/30 rounded-2xl p-8 hover:shadow-2xl 
+                className="bg-[var(--brand-rose)]/10 shadow-lg border border-[var(--brand-rose)]/30 
+                        rounded-2xl p-8 hover:shadow-2xl 
                         transition flex flex-col items-center"
               >
                 <div

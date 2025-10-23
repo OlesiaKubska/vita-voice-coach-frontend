@@ -15,10 +15,11 @@ export default function ChatWidget() {
 
   const tooltipTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const chatEndRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [messages, loading, isOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +44,15 @@ export default function ChatWidget() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isOpen) inputRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isOpen]);
+
   const handleSend = async () => {
     if (!input.trim()) return;
     setMessages((prev) => [...prev, { role: "user", text: input }]);
@@ -60,53 +70,79 @@ export default function ChatWidget() {
     } finally {
       setLoading(false);
       setInput("");
+      inputRef.current?.focus();
     }
   };
 
   return (
     <>
-      {/* Chat Button */}
       <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2">
         {showTooltip && !isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.4 }}
-            className="bg-black text-white text-sm px-3 py-1 rounded-full shadow-md"
+            transition={{ duration: 0.3 }}
+            className="px-3 py-1 text-sm rounded-full shadow-md bg-[var(--brand-green)] text-[var(--brand-beige)]"
+            role="status"
           >
             💬 Masz pytanie? Napisz do mnie!
           </motion.div>
         )}
         <motion.button
+          type="button"
+          aria-label={isOpen ? "Zamknij czat" : "Otwórz czat"}
+          aria-expanded={isOpen}
+          aria-controls="chat-panel"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.3 }}
           onClick={() => setIsOpen((prev) => !prev)}
-          className="relative w-14 h-14 rounded-full border border-(--brand-beige) bg-(--brand-green) text-white text-2xl flex items-center justify-center shadow-lg hover:bg-(--brand-rose) transition duration-300"
+          className="relative w-14 h-14 rounded-full text-2xl flex items-center justify-center shadow-lg
+                     bg-[var(--brand-green)] text-[var(--brand-beige)]
+                     border border-[var(--brand-beige)]/30
+                     hover:bg-[var(--brand-rose)] focus:outline-none
+                     focus-visible:ring-2 focus-visible:ring-[var(--brand-rose)]/60
+                     transition"
         >
           💬
-          {/* Notification dot */}
           {!isOpen && (
-            <span className="absolute top-1 right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white"></span>
+            <span
+              className="absolute top-1 right-1 w-3 h-3 bg-red-500 
+                        rounded-full border-2 border-[var(--brand-beige)]"
+              aria-hidden
+            />
           )}
         </motion.button>
       </div>
 
-      {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-80 h-[500px] bg-white shadow-xl rounded-lg border border-gray-200 flex flex-col overflow-hidden z-50">
-          {/* Header */}
-          <div className="p-3 font-semibold bg-gradient-to-r from-pink-300 to-green-300 text-white flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-white/30 flex items-center justify-center">
+        <div
+          id="chat-panel"
+          className="fixed bottom-24 right-6 w-80 h-[500px] z-50 overflow-hidden
+                     rounded-lg border shadow-xl
+                     bg-[var(--background)] text-[var(--foreground)]
+                     border-[var(--brand-green)]/15"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Chat z Vitą"
+        >
+          <div
+            className="p-3 font-semibold text-[var(--brand-beige)]
+                          bg-gradient-to-r from-[var(--brand-rose)]/80 to-[var(--brand-green)]/70
+                          flex items-center gap-2"
+          >
+            <div className="w-8 h-8 rounded-full bg-[var(--brand-beige)]/25 grid place-items-center">
               🎤
             </div>
             Chat z Vitą
           </div>
 
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-(--brand-beige)/30">
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-4
+                          bg-[var(--brand-beige)]/30 dark:bg-[var(--brand-beige)]/10"
+          >
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -115,47 +151,70 @@ export default function ChatWidget() {
                 }`}
               >
                 {msg.role === "bot" && (
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-300 to-green-300 flex items-center justify-center text-white font-bold text-sm">
+                  <div
+                    className="w-8 h-8 rounded-full text-[var(--brand-beige)]
+                                  bg-gradient-to-r from-[var(--brand-rose)] to-[var(--brand-green)]
+                                  grid place-items-center text-sm font-bold"
+                  >
                     V
                   </div>
                 )}
+
                 <div
-                  className={`px-3 py-2 rounded-lg max-w-[70%] text-sm ${
+                  className={`px-3 py-2 rounded-lg max-w-[70%] text-sm leading-relaxed
+                  ${
                     msg.role === "user"
-                      ? "bg-(--brand-rose) text-white rounded-br-none"
-                      : "bg-white text-(--brand-green) border border-(--brand-green)/20 rounded-bl-none"
+                      ? "bg-[var(--brand-rose)] text-[var(--brand-beige)] rounded-br-none"
+                      : "bg-[var(--brand-beige)] text-[var(--brand-green)] rounded-bl-none border border-[var(--brand-green)]/15"
                   }`}
                 >
                   {msg.text}
                 </div>
+
                 {msg.role === "user" && (
-                  <div className="w-8 h-8 rounded-full bg-(--brand-rose)/80 flex items-center justify-center text-white font-bold text-sm">
+                  <div
+                    className="w-8 h-8 rounded-full grid place-items-center text-sm font-bold
+                                  bg-[var(--brand-rose)]/85 text-[var(--brand-beige)]"
+                  >
                     U
                   </div>
                 )}
               </div>
             ))}
+
             {loading && (
-              <div className="text-sm text-gray-400 italic">
+              <div className="text-sm italic text-[var(--brand-sage)]">
                 Piszę odpowiedź...
               </div>
             )}
             <div ref={chatEndRef} />
           </div>
 
-          {/* Input */}
-          <div className="flex border-t p-2 bg-white">
+          <div
+            className="flex items-center gap-2 border-t p-2
+                          bg-[var(--background)] border-[var(--brand-green)]/15"
+          >
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
-              className="flex-1 px-3 py-2 outline-none text-sm border border-gray-200 rounded-lg"
+              className="flex-1 px-3 py-2 text-sm rounded-lg outline-none
+                         bg-[var(--brand-beige)] text-[var(--brand-green)]
+                         placeholder-[var(--brand-sage)]/70
+                         border border-[var(--brand-green)]/15
+                         focus:border-[var(--brand-rose)]/50 focus:ring-2 focus:ring-[var(--brand-rose)]/40"
               placeholder="Napisz wiadomość..."
             />
             <button
+              type="button"
               onClick={handleSend}
-              className="ml-2 px-4 bg-(--brand-green) text-white rounded-lg hover:bg-(--brand-rose) transition"
+              className="px-4 h-10 rounded-lg font-medium
+                         bg-[var(--brand-green)] text-[var(--brand-beige)]
+                         hover:bg-[var(--brand-rose)] transition
+                         focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-rose)]/60"
+              title="Wyślij"
             >
               ➤
             </button>

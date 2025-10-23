@@ -50,7 +50,7 @@ export default function BlogCard({
           </div>
         )}
 
-        <h2 className="text-2xl font-semibold mb-3 text-(--brand-green)">
+        <h2 className="text-2xl font-semibold mb-3 text-[var(--brand-green)]">
           {title}
         </h2>
 

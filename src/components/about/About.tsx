@@ -54,10 +54,10 @@ export default function About() {
             osobiste.
           </p>
 
-          <h3 className="text-xl font-semibold mb-3 text-(--brand-green)">
+          <h3 className="text-xl font-semibold mb-3 text-[var(--brand-green)]">
             Specjalizacje:
           </h3>
-          <ul className="grid grid-cols-2 gap-3 text-(--brand-green) mb-6">
+          <ul className="grid grid-cols-2 gap-3 text-[var(--brand-green)] mb-6">
             <li>🎤 Nauka śpiewu</li>
             <li>🎶 Dyrygentura</li>
             <li>💎 Rozwój osobisty</li>
@@ -75,8 +75,8 @@ export default function About() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="px-6 py-3 bg-(--brand-rose) text-(--brand-beige) font-medium rounded-md shadow
-               hover:bg-(--brand-beige) hover:border hover:border-(--brand-rose) hover:text-(--brand-rose) transition-colors duration-300 text-center"
+                className="px-6 py-3 bg-[var(--brand-rose)] text-[var(--brand-beige)] font-medium rounded-md shadow
+               hover:bg-[var(--brand-beige)] hover:border hover:border-[var(--brand-rose)] hover:text-[var(--brand-rose)] transition-colors duration-300 text-center"
               >
                 Poznaj moją ofertę
               </motion.div>
@@ -85,8 +85,8 @@ export default function About() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="px-6 py-3 bg-(--brand-beige) border border-(--brand-rose) text-(--brand-rose) font-medium rounded-md
-               hover:bg-(--brand-rose) hover:text-(--brand-beige) transition-colors duration-300 text-center"
+                className="px-6 py-3 bg-[var(--brand-beige)] border border-[var(--brand-rose)] text-[var(--brand-rose)] font-medium rounded-md
+               hover:bg-[var(--brand-rose)] hover:text-[var(--brand-beige)] transition-colors duration-300 text-center"
               >
                 Umów się na konsultację
               </motion.div>

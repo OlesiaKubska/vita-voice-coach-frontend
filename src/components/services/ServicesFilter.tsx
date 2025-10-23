@@ -10,7 +10,6 @@ export default function ServicesFilter({ services }: { services: Service[] }) {
   const pathname = usePathname();
   const active = search.get("category") ?? "all";
 
-  // Унікальні категорії з бекенду
   const categories = useMemo(() => {
     const set = new Set<string>();
     services.forEach((s) => s.category && set.add(s.category));

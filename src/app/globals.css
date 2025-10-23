@@ -7,6 +7,8 @@
 :root {
   --background: #F6F2EE;
   --foreground: #214424;
+  --footer-background: #214424;
+  --footer-foreground: #F6F2EE;
 
   --brand-green: #214424;
   --brand-rose: #D96689;
@@ -20,6 +22,8 @@
 html.dark {
   --background: #0a0a0a;         
   --foreground: #ededed;
+  --footer-background: #FFFFFF1A;
+  --footer-foreground: #ededed;
 
   --brand-green: #dfe7df;       
   --brand-rose:  #f0a8bf;
