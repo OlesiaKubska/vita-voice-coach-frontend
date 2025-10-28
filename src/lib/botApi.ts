@@ -1,25 +1,31 @@
-import axios from "axios";
+export interface ChatResponse { reply: string }
 
-export interface ChatResponse {
-  reply: string;
-}
+export async function sendBotMessage(message: string, userId = "frontend-user"): Promise<ChatResponse> {
+  if (!message.trim()) return { reply: "Message is empty." };
 
-const BOT_URL = process.env.NEXT_PUBLIC_BOT_URL;
-const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 15_000);
+  
+  try {
+    const res = await fetch("/api/bot", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message, userId }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
 
-export async function sendBotMessage(
-  message: string,
-  userId: string = "frontend-user"): Promise<ChatResponse> {
-    const res = await axios.post<ChatResponse>(
-      `${BOT_URL}/chat`,
-      { message, user_id: userId },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${API_TOKEN}`,
-        },
-      }
-    );
-    console.log("Bot response:", res.data);
-    return res.data;
+    const data: unknown = await res.json();
+    if (!res.ok) {
+      const msg = (data as { message?: string })?.message ?? res.statusText ?? "Unknown error";
+      return { reply: `Bot error: ${msg}` };
+    }
+
+    const reply = (data as { reply?: string })?.reply;
+    return typeof reply === "string" ? { reply } : { reply: "Bot error: invalid response" };
+  } catch (e: unknown) {
+    clearTimeout(timeoutId);
+    const msg = e instanceof Error ? e.message : "Network error";
+    return { reply: msg };
+  }
 }

@@ -3,18 +3,19 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Service } from "../../lib/types";
+import type { Service } from "@/lib/types";
 import { FaArrowLeft } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { makeAbsolute } from "@/lib/utils";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import { pickImageUrl, makeAbsolute } from "@/lib/utils";
 
 export default function ServiceContent({ service }: { service: Service }) {
-  const imageUrl =
-    typeof service.image === "string" ? service.image : service.image?.url;
-  const coverUrl = makeAbsolute(imageUrl);
+  const hero = pickImageUrl(service.image, service.title);
+  const html = service.description ?? "";
 
   return (
     <main className="max-w-3xl mx-auto py-20 px-6">
@@ -22,19 +23,20 @@ export default function ServiceContent({ service }: { service: Service }) {
         <Link
           href="/services"
           className="inline-flex items-center gap-2 text-[var(--brand-rose)] mb-6 hover:underline"
+          aria-label="Powrót do oferty"
         >
           <FaArrowLeft /> Powrót do oferty
         </Link>
       </div>
 
-      {coverUrl && (
+      {hero?.url && (
         <div className="relative w-full h-56 sm:h-64 md:h-72 lg:h-96 mb-6">
           <Image
-            src={coverUrl}
-            alt={service.title}
+            src={hero.url}
+            alt={hero.alt}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            priority
+            loading="lazy"
             className="object-cover rounded-lg"
           />
         </div>
@@ -62,6 +64,8 @@ export default function ServiceContent({ service }: { service: Service }) {
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[
+            rehypeRaw,
+            rehypeSanitize,
             rehypeSlug,
             [rehypeAutolinkHeadings, { behavior: "wrap" }],
           ]}
@@ -77,18 +81,20 @@ export default function ServiceContent({ service }: { service: Service }) {
                 loading="lazy"
               />
             ),
-            a: ({ href = "", children }) => (
-              <a
-                href={makeAbsolute(href)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {children}
-              </a>
-            ),
+            a: ({ href = "", children }) => {
+              const url = String(href);
+              const isExternal = /^https?:\/\//i.test(url);
+              return isExternal ? (
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  {children}
+                </a>
+              ) : (
+                <Link href={makeAbsolute(url)}>{children}</Link>
+              );
+            },
           }}
         >
-          {service.description}
+          {html}
         </ReactMarkdown>
       </motion.article>
     </main>

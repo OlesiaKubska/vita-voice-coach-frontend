@@ -2,12 +2,16 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { sendBotMessage } from "../lib/botApi";
+import { sendBotMessage } from "@/lib/botApi";
+
+interface Message {
+  id: string;
+  role: "user" | "bot";
+  text: string;
+}
 
 export default function ChatWidget() {
-  const [messages, setMessages] = useState<{ role: string; text: string }[]>(
-    []
-  );
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +49,9 @@ export default function ChatWidget() {
   }, []);
 
   useEffect(() => {
-    if (isOpen) inputRef.current?.focus();
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setIsOpen(false);
     };
@@ -55,22 +61,24 @@ export default function ChatWidget() {
 
   const handleSend = async () => {
     if (!input.trim()) return;
-    setMessages((prev) => [...prev, { role: "user", text: input }]);
+
+    const userMessageId = Date.now().toString();
+    setMessages((prev) => [
+      ...prev,
+      { id: userMessageId, role: "user", text: input },
+    ]);
     setLoading(true);
+    setInput("");
 
     try {
       const res = await sendBotMessage(input, "frontend-user");
-      setMessages((prev) => [...prev, { role: "bot", text: res.reply }]);
-    } catch (err) {
-      console.error(err);
+      const botMessageId = Date.now().toString() + "-bot";
       setMessages((prev) => [
         ...prev,
-        { role: "bot", text: "❌ Serwer niedostępny" },
+        { id: botMessageId, role: "bot", text: res.reply },
       ]);
     } finally {
       setLoading(false);
-      setInput("");
-      inputRef.current?.focus();
     }
   };
 
@@ -141,11 +149,13 @@ export default function ChatWidget() {
 
           <div
             className="flex-1 overflow-y-auto p-4 space-y-4
-                          bg-[var(--brand-beige)]/30 dark:bg-[var(--brand-beige)]/10"
+                      bg-[var(--brand-beige)]/30 dark:bg-[var(--brand-beige)]/10"
+            role="log"
+            aria-live="polite"
           >
-            {messages.map((msg, i) => (
+            {messages.map((msg) => (
               <div
-                key={i}
+                key={msg.id}
                 className={`flex items-end gap-2 ${
                   msg.role === "user" ? "justify-end" : "justify-start"
                 }`}
@@ -206,6 +216,7 @@ export default function ChatWidget() {
                          border border-[var(--brand-green)]/15
                          focus:border-[var(--brand-rose)]/50 focus:ring-2 focus:ring-[var(--brand-rose)]/40"
               placeholder="Napisz wiadomość..."
+              disabled={loading}
             />
             <button
               type="button"
@@ -215,6 +226,7 @@ export default function ChatWidget() {
                          hover:bg-[var(--brand-rose)] transition
                          focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--brand-rose)]/60"
               title="Wyślij"
+              disabled={loading || !input.trim()}
             >
               ➤
             </button>

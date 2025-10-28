@@ -1,21 +1,26 @@
 "use client";
 
-import BlogCard from "@/components/blog/BlogCard";
-import { getPosts } from "../../lib/api";
-import { Post } from "../../lib/types";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-
-import React, { useEffect, useState } from "react";
+import BlogCard from "@/components/blog/BlogCard";
+import { getPosts } from "@/lib/api";
+import type { Post } from "@/lib/types";
+import { pickImageUrl, makeExcerptFromHtml } from "@/lib/utils";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPosts() {
-      const fetchedPosts = await getPosts();
-      setPosts(fetchedPosts);
-    }
-    fetchPosts();
+    getPosts()
+      .then((fetchedPosts) =>
+        setPosts(Array.isArray(fetchedPosts) ? fetchedPosts : [])
+      )
+      .catch((err) => {
+        console.error("Błąd podczas pobierania postów:", err);
+        setPosts([]);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -29,29 +34,40 @@ export default function BlogPage() {
         Blog
       </motion.h1>
 
+      {loading && (
+        <p className="text-center text-[var(--brand-green)]">
+          Ładowanie wpisów…
+        </p>
+      )}
+
+      {!loading && !posts.length && (
+        <p className="text-center text-[var(--brand-green)]">
+          Jeszcze brak wpisów — wkrótce się pojawią!
+        </p>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {posts.map((post, i) => (
-          <motion.div
-            key={post.id}
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, delay: i * 0.2 }}
-          >
-            <BlogCard
-              title={post.title}
-              excerpt={
-                post.content ? post.content.substring(0, 100) + "..." : ""
-              }
-              slug={post.slug}
-              date={post.publishedAt}
-              image={
-                typeof post.coverImage === "string"
-                  ? post.coverImage
-                  : post.coverImage?.url
-              }
-            />
-          </motion.div>
-        ))}
+        {posts.map((post, index) => {
+          const image = pickImageUrl(post.coverImage ?? null, post.title);
+          const excerpt = makeExcerptFromHtml(post.content ?? "", 160);
+
+          return (
+            <motion.div
+              key={post.id}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              <BlogCard
+                title={post.title ?? "Bez tytułu"}
+                excerpt={excerpt}
+                slug={post.slug ?? "#"}
+                date={post.publishedAt ?? ""}
+                image={image?.url ?? ""}
+              />
+            </motion.div>
+          );
+        })}
       </div>
     </main>
   );

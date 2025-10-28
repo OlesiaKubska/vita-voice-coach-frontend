@@ -1,87 +1,112 @@
-export interface StrapiResponse<T> {
-  data: T[];
+export type ISODateString = string;
+
+/*  Upload / Media  */
+
+export interface UploadFormat {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  mime?: string;
+}
+export interface UploadFileAttributes {
+  url: string;
+  alternativeText?: string | null;
+  caption?: string | null;
+  width?: number | null;
+  height?: number | null;
+  mime?: string | null;
+  formats?: Record<string, UploadFormat> | null;
+}
+export type UploadFile = { id: number } & UploadFileAttributes;
+
+/* wrappers for Strapi  */
+
+export interface StrapiEntity<T> {
+  id: number;
+  attributes: T;
 }
 
-export interface PostAttributes {
-  title: string;
-  slug: string;
-  content: string;
-  coverImage?: {
-    data?: {
-      attributes?: {
-        url: string;
-      };
-    };
-  };
-  publishedAt: string;
+export interface MediaRef {
+  data: { id: number; attributes: UploadFileAttributes } | null;
 }
+
+export interface StrapiListResponse<T> {
+  data: T[];
+  meta: {
+    pagination: { page: number; pageSize: number; pageCount: number; total: number };
+  };
+}
+export interface StrapiSingleResponse<T> {
+  data: T | null;
+}
+
+/* Post */
 
 export interface Post {
   id: number;
-  attributes: PostAttributes;
-  slug: string;
-  coverImage?: { url: string } | string; 
   title: string;
+  slug: string;
   content: string;
-  publishedAt: string;
-  updatedAt: string;
+  coverImage?: UploadFile | null;
+  publishedAt: ISODateString;
+  createdAt: ISODateString;
+  updatedAt: ISODateString;
 }
 
-export interface ServiceAttributes {
-  title: string;
-  description: string;
-  icon?: string;
-}
+/* Service */
+
+export type ServiceIcon =
+  | 'FaMicrophone' | 'FaMicrophoneAlt' | 'FaMusic' | 'FaUsers' | 'FaChalkboardTeacher'
+  | 'FaHeadphones' | 'FaStar' | 'FaComments' | 'FaBuilding' | 'FaVideo' | 'FaHeart'
+  | 'FaFemale' | 'FaPodcast' | 'FaLaptop' | 'FaUserGraduate' | 'FaLandmark';
+
+export type ServiceCategory =
+  | 'Lekcje' | 'Rozwój osobisty' | 'Wystąpienia' | 'Kursy online' | 'Nagrania' | 'Warsztaty';
 
 export interface Service {
   id: number;
   title: string;
-  slug: string;
-  description: string;
   shortDescription: string;
-  icon?: string;
-  category: "warsztaty" | "lekcje" | "kursy-online" | "wystapienia" | "rozwoj-osobisty" | "nagrania";
-  mode?: ("online" | "stacjonarnie")[];
-  audience?: ("kobiety" | "mlodziez" | "korporacje")[];
-  image?: {
-    url: string;
-    name?: string;
-    id?: number;
-  };
+  description?: string | null;
+  slug: string;
+  icon: ServiceIcon;
+  image?: UploadFile | null;
+  category: ServiceCategory;
+  highlight: boolean;
+  createdAt: ISODateString;
+  updatedAt: ISODateString;
+  publishedAt?: ISODateString | null;
 }
 
-// Testimonial Types
-export interface Media {
-  url: string;
-}
-
-export interface TestimonialAttributes {
-  author: string;
-  text: string;
-  rating: number;
-  photo: {
-    data?: {
-      attributes: {
-        url: string;
-      };
-    } | null;
-  };
-  publishedAt: string;
-}
-
+/* Testimonial */
 export interface Testimonial {
-id: number;
+  id: number;
   author: string;
   text: string;
   rating: number;
-  photo?: {
-    url: string;
-  };
-  publishedAt: string;
+  photo?: UploadFile | null;
+  publishedAt: ISODateString;
+  createdAt: ISODateString;
+  updatedAt: ISODateString;
 }
 
+/* Message */
 export interface MessageData {
   name: string;
   email: string;
   message: string;
+}
+
+export interface Message {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  ip?: string | null;
+  userAgent?: string | null;
+  read: boolean;
+  createdAt: ISODateString;
+  updatedAt: ISODateString;
+  publishedAt?: ISODateString | null;
 }

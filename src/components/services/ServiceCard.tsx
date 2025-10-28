@@ -5,12 +5,12 @@ import Image from "next/image";
 import * as FaIcons from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
-import { makeAbsolute, buildExcerpt } from "@/lib/utils";
+import { buildExcerpt, pickImageUrl } from "@/lib/utils";
 import type { Service } from "@/lib/types";
 
 type ServiceCardProps = Pick<
   Service,
-  "id" | "title" | "shortDescription" | "slug" | "icon" | "image"
+  "title" | "shortDescription" | "icon" | "image" | "slug"
 >;
 
 export default function ServiceCard({
@@ -20,10 +20,10 @@ export default function ServiceCard({
   slug,
   image,
 }: ServiceCardProps) {
-  const Icon: IconType =
-    (icon && FaIcons[icon as keyof typeof FaIcons]) || FaIcons.FaStar;
+  const Icon: IconType = (FaIcons[icon as keyof typeof FaIcons] ??
+    FaIcons.FaStar) as IconType;
 
-  const imgSrc = image?.url ? makeAbsolute(image.url) : undefined;
+  const hero = pickImageUrl(image, title);
   const preview = buildExcerpt(shortDescription, 200);
 
   return (
@@ -39,14 +39,14 @@ export default function ServiceCard({
                       bg-[var(--brand-beige)]/90 backdrop-blur-sm
                       hover:shadow-xl hover:-translate-y-1 transition"
       >
-        {imgSrc && (
+        {hero?.url && (
           <div className="relative w-full h-48 mb-4">
             <Image
-              src={imgSrc}
-              alt={title}
+              src={hero.url}
+              alt={hero.alt}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              priority
+              loading="lazy"
               className="object-cover rounded-md"
             />
           </div>

@@ -3,27 +3,28 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "../../lib/types";
+import type { Post } from "@/lib/types";
 import { FaArrowLeft } from "react-icons/fa";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { makeAbsolute, formatDate } from "@/lib/utils";
+import rehypeRaw from "rehype-raw";
+import rehypeSanitize from "rehype-sanitize";
+import { pickImageUrl, formatDate, makeAbsolute } from "@/lib/utils";
 import TableOfContents from "@/components/blog/TableOfContents";
 
 export default function PostContent({ post }: { post: Post }) {
-  const imageUrl =
-    typeof post.coverImage === "string"
-      ? post.coverImage
-      : post.coverImage?.url;
-  const coverUrl = makeAbsolute(imageUrl);
+  const attrs = post;
+  const coverUrl = pickImageUrl(attrs.coverImage, attrs.title);
+  const html = attrs.content ?? "";
 
   return (
     <>
       <div className="sticky top-0 backdrop-blur-sm py-3 z-50 mb-4">
         <Link
           href="/blog"
+          aria-label="Wróć do bloga"
           className="inline-flex items-center text-[var(--brand-rose)] font-medium hover:underline"
         >
           <FaArrowLeft className="mr-2" /> Wróć do bloga
@@ -36,22 +37,22 @@ export default function PostContent({ post }: { post: Post }) {
         transition={{ duration: 0.8 }}
         className="text-4xl font-bold mb-3 text-[var(--brand-green)]"
       >
-        {post.title}
+        {attrs.title}
       </motion.h1>
 
       <div className="text-sm text-[var(--brand-sage)]/90 mb-6">
-        <p>Opublikowano: {formatDate(post.publishedAt)}</p>
-        <p>Ostatnia aktualizacja: {formatDate(post.updatedAt)}</p>
+        <p>Opublikowano: {formatDate(attrs.publishedAt)}</p>
+        <p>Ostatnia aktualizacja: {formatDate(attrs.updatedAt)}</p>
       </div>
 
-      {coverUrl && (
+      {coverUrl?.url && (
         <div className="relative w-full h-56 md:h-[28rem] lg:h-[32rem] mb-6">
           <Image
-            src={coverUrl}
-            alt={post.title}
+            src={coverUrl.url}
+            alt={coverUrl.alt}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1200px"
-            priority
+            loading="lazy"
             className="object-cover rounded-lg"
           />
         </div>
@@ -73,6 +74,8 @@ export default function PostContent({ post }: { post: Post }) {
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[
+            rehypeRaw,
+            rehypeSanitize,
             rehypeSlug,
             [rehypeAutolinkHeadings, { behavior: "wrap" }],
           ]}
@@ -89,18 +92,20 @@ export default function PostContent({ post }: { post: Post }) {
               />
             ),
 
-            a: ({ href = "", children }) => (
-              <a
-                href={makeAbsolute(href)}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {children}
-              </a>
-            ),
+            a: ({ href = "", children }) => {
+              const url = String(href);
+              const isExternal = /^https?:\/\//i.test(url);
+              return isExternal ? (
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  {children}
+                </a>
+              ) : (
+                <Link href={url}>{children}</Link>
+              );
+            },
           }}
         >
-          {post.content}
+          {html}
         </ReactMarkdown>
       </motion.article>
     </>

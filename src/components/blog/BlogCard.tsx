@@ -28,23 +28,23 @@ export default function BlogCard({
     <div className="relative group">
       <div
         className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100
-                        transition duration-500 blur-2xl bg-gradient-to-r from-[var(--brand-green)] 
-                        via-[var(--brand-sage)] to-[var(--brand-rose)]/60 animate-pulse
-                        dark:bg-[var(--brand-beige)]/5 dark:border-[var(--brand-rose)]/30"
+                  transition duration-500 blur-2xl bg-gradient-to-r from-[var(--brand-green)] 
+                  via-[var(--brand-sage)] to-[var(--brand-rose)]/60 animate-pulse
+                  dark:bg-[var(--brand-beige)]/5 dark:border-[var(--brand-rose)]/30"
       ></div>
       <div
         className="relative border border-[var(--brand-rose)]/20 rounded-lg p-6 shadow-md
-                      bg-[var(--brand-beige)]/90 backdrop-blur-sm
-                      hover:shadow-xl hover:-translate-y-1 transition"
+                  bg-[var(--brand-beige)]/90 backdrop-blur-sm
+                  hover:shadow-xl hover:-translate-y-1 transition"
       >
         {imgSrc && (
-          <div className="relative w-full h-56 lg:h-82 mb-4">
+          <div className="relative w-full h-56 lg:h-72 mb-4">
             <Image
               src={imgSrc}
-              alt={title}
+              alt={title || "Blog image"}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              priority
+              loading="lazy"
               className="object-cover rounded-md"
             />
           </div>
@@ -62,6 +62,7 @@ export default function BlogCard({
 
         <Link
           href={slug ? `/blog/${slug}` : "#"}
+          aria-label={slug ? `Czytaj więcej: ${title}` : undefined}
           className="inline-flex items-center text-[var(--brand-rose)] font-medium hover:underline"
         >
           Czytaj więcej <FaArrowRight className="ml-2" />

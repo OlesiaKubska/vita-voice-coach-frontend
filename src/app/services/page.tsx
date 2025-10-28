@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getServices } from "../../lib/api";
-import { Service } from "../../lib/types";
+import { getServices } from "@/lib/api";
+import { Service } from "@/lib/types";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import ServicesFilter from "@/components/services/ServicesFilter";
@@ -12,13 +12,21 @@ export default function ServicesPage() {
   const [services, setServices] = useState<Service[]>([]);
   const search = useSearchParams();
   const category = search.get("category");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchData() {
-      const fetchedServices = await getServices();
-      setServices(fetchedServices);
-    }
-    fetchData();
+    let active = true;
+    (async () => {
+      try {
+        const fetchedServices = await getServices();
+        if (active) setServices(fetchedServices);
+      } finally {
+        if (active) setLoading(false);
+      }
+    })();
+    return () => {
+      active = false;
+    };
   }, []);
 
   return (
@@ -46,6 +54,12 @@ export default function ServicesPage() {
           Twój głos jest Twoją siłą.
         </p>
       </motion.div>
+
+      {loading && (
+        <p className="text-center text-[var(--brand-green)]">
+          Ładowanie usług…
+        </p>
+      )}
 
       <div className="max-w-6xl text-center mx-auto px-6">
         <ServicesFilter services={services} />

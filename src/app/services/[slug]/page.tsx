@@ -1,10 +1,21 @@
 import ServiceContent from "@/components/services/ServiceContent";
-import { getServices } from "../../../lib/api";
-import { Service } from "../../../lib/types";
+import { getServiceBySlug, getServices } from "@/lib/api";
+import { Service } from "@/lib/types";
+import { notFound } from "next/navigation";
+
+export const revalidate = 300;
+export const dynamicParams = true;
 
 export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
-  const services: Service[] = await getServices();
-  return services.map((service) => ({ slug: service.slug }));
+  try {
+    const services: Service[] = await getServices();
+    return (Array.isArray(services) ? services : []).map((service) => ({
+      slug: service.slug,
+    }));
+  } catch (error) {
+    console.error("[generateStaticParams for services] failed:", error);
+    return [];
+  }
 }
 
 export default async function ServicePage({
@@ -13,11 +24,16 @@ export default async function ServicePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const services: Service[] = await getServices();
-  const service = services.find((s) => s.slug === slug);
+
+  let service: Service | null = null;
+  try {
+    service = await getServiceBySlug(slug);
+  } catch (error) {
+    console.error("[ServicePage] getServiceBySlug failed:", error);
+  }
 
   if (!service) {
-    return <div className="text-center py-20">Service not found</div>;
+    notFound();
   }
 
   return (
