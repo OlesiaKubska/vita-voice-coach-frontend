@@ -33,8 +33,7 @@ export default function ThemeToggle() {
       aria-label={dark ? "Przełącz na jasny motyw" : "Przełącz na ciemny motyw"}
       title={dark ? "Jasny" : "Ciemny"}
       className="flex items-center justify-center w-10 h-10 rounded-md transition
-                 bg-[var(--brand-rose)] text-white hover:opacity-90
-                 dark:bg-[var(--brand-beige)] dark:text-[var(--brand-green)]"
+                 bg-transparent text-[var(--brand-green)] hover:opacity-90"
     >
       {dark ? <FaSun size={20} /> : <FaMoon size={20} />}
     </button>

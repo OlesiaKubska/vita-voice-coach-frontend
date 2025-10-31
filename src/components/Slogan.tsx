@@ -7,7 +7,7 @@ export default function Slogan() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, ease: "easeOut" }}
-      className="text-center py-4 bg-white/60 dark:bg-white/10 backdrop-blur-sm shadow-md"
+      className="text-center py-4 bg-[var(--brand-rose)]/10 dark:bg-white/10 backdrop-blur-sm shadow-md"
     >
       <h2
         className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text

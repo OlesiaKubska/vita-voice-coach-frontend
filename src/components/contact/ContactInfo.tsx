@@ -47,16 +47,16 @@ export default function ContactInfo() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="relative w-full h-[420px] md:h-[500px] lg:h-[560px]
+            className="relative w-full max-w-sm mx-auto
                       rounded-2xl overflow-hidden
-                      bg-transparent lg:justify-self-start"
+                      bg-transparent aspect-[3/4]"
           >
             <Image
               src="/images/about/contact.jpg"
               alt="Vita Kociubajło – kontakt"
               fill
               sizes="(min-width: 1024px) 520px, (min-width: 768px) 50vw, 100vw"
-              className="object-cover lg:object-top bg-transparent
+              className="object-cover object-center bg-transparent
                       transition-transform duration-700 hover:scale-105
                       [clip-path:ellipse(60%_80%_at_50%_80%)]"
               priority

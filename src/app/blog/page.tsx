@@ -46,7 +46,7 @@ export default function BlogPage() {
         </p>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch auto-rows-fr">
         {posts.map((post, index) => {
           const image = pickImageUrl(post.coverImage ?? null, post.title);
           const excerpt = makeExcerptFromHtml(post.content ?? "", 160);
@@ -57,6 +57,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="h-full"
             >
               <BlogCard
                 title={post.title ?? "Bez tytułu"}
