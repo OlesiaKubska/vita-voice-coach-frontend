@@ -25,13 +25,17 @@ export default function ServicesGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+    <div
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6
+                  items-stretch auto-rows-fr"
+    >
       {filteredServices.map((service, index) => (
         <motion.div
           key={service.id}
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, delay: index * 0.12 }}
+          className="h-full"
         >
           <ServiceCard
             title={service.title}

@@ -25,7 +25,7 @@ export default function BlogCard({
   const preview = buildExcerpt(excerpt, 220);
 
   return (
-    <div className="relative group">
+    <article className="group h-full flex flex-col relative">
       <div
         className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100
                   transition duration-500 blur-2xl bg-gradient-to-r from-[var(--brand-green)] 
@@ -35,17 +35,17 @@ export default function BlogCard({
       <div
         className="relative border border-[var(--brand-rose)]/20 rounded-lg p-6 shadow-md
                   bg-[var(--brand-beige)]/90 backdrop-blur-sm
-                  hover:shadow-xl hover:-translate-y-1 transition"
+                  hover:shadow-xl hover:-translate-y-1 transition flex flex-col flex-1"
       >
         {imgSrc && (
-          <div className="relative w-full h-56 lg:h-72 mb-4">
+          <div className="relative w-full aspect-[16/9] mb-4 overflow-hidden rounded-md">
             <Image
               src={imgSrc}
               alt={title || "Blog image"}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               loading="lazy"
-              className="object-cover rounded-md"
+              className="object-cover"
             />
           </div>
         )}
@@ -63,11 +63,11 @@ export default function BlogCard({
         <Link
           href={slug ? `/blog/${slug}` : "#"}
           aria-label={slug ? `Czytaj więcej: ${title}` : undefined}
-          className="inline-flex items-center text-[var(--brand-rose)] font-medium hover:underline"
+          className="mt-auto inline-flex items-center text-[var(--brand-rose)] font-medium hover:underline"
         >
           Czytaj więcej <FaArrowRight className="ml-2" />
         </Link>
       </div>
-    </div>
+    </article>
   );
 }
