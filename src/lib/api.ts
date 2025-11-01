@@ -101,9 +101,14 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 // Message sending
 export async function sendMessage(payload: MessageData): Promise<boolean> {
   try {
-    const res = await api.post<StrapiSingleResponse<Message>>(`/api/messages`, { data: payload });
-    
-    return Boolean(res.data);
+    const res = await api.post<StrapiSingleResponse<Message>>(`/api/messages`, { data: {
+    name: payload.name,
+    email: payload.email,
+    message: payload.message,
+  },
+});
+    // console.log(JSON.stringify({ data: payload }, null, 2));
+    return Boolean(res.data.data);
   } catch (error) {
     throw normalizeAxiosError(error);
   }
