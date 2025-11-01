@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Slogan from "@/components/Slogan";
 import ScrollToTop from "@/components/ScrollToTop";
-import ChatWidget from "@/components/ChatWidget";
+// import ChatWidget from "@/components/ChatWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,7 +75,7 @@ export default async function RootLayout({
         <Navbar />
         <main>{children}</main>
         <ScrollToTop />
-        <ChatWidget />
+        {/* <ChatWidget /> */}
         <Footer />
       </body>
     </html>

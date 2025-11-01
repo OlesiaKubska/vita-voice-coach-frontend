@@ -76,62 +76,71 @@ export default function Biography() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section id="biography" className="py-20 bg-[var(--brand-beige)]/40">
-      <motion.h2
-        initial={{ opacity: 0, y: -30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="text-4xl font-bold text-center text-[var(--brand-green)] mb-12"
-      >
-        Moja historia
-      </motion.h2>
+    <section
+      id="biography"
+      className="relative overflow-hidden py-20 bg-[var(--brand-beige)]/40"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-grid opacity-40"
+      />
+      <div className="relative z-10">
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-4xl font-bold text-center text-[var(--brand-green)] mb-12"
+        >
+          Moja historia
+        </motion.h2>
 
-      <div className="max-w-6xl mx-auto px-6 space-y-10">
-        {sections.map((section, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: i * 0.2 }}
-            viewport={{ once: true }}
-            className="bg-[var(--brand-beige)]/40 shadow-md rounded-lg overflow-hidden flex flex-col md:flex-row items-center"
-          >
-            {section.image && (
-              <div className="relative w-full md:w-1/2">
-                <Image
-                  src={section.image}
-                  alt={section.year}
-                  width={800}
-                  height={500}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                  className="w-full h-auto object-cover rounded-lg"
-                  priority
-                />
+        <div className="max-w-6xl mx-auto px-6 space-y-10">
+          {sections.map((section, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: i * 0.2 }}
+              viewport={{ once: true }}
+              className="bg-[var(--brand-beige)]/40 shadow-md rounded-lg overflow-hidden flex flex-col md:flex-row items-center"
+            >
+              {section.image && (
+                <div className="relative w-full md:w-1/2">
+                  <Image
+                    src={section.image}
+                    alt={section.year}
+                    width={800}
+                    height={500}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+                    className="w-full h-auto object-cover rounded-lg"
+                    priority
+                  />
+                </div>
+              )}
+
+              <div className="p-6 md:w-2/3">
+                <h3 className="text-2xl font-bold text-[var(--brand-green)] mb-3">
+                  <span className="text-3xl text-[var(--brand-rose)] ">
+                    {section.icon}
+                  </span>{" "}
+                  {section.year}
+                </h3>
+                <p className="text-[var(--brand-green)] text-lg leading-relaxed">
+                  {expanded === i
+                    ? section.text
+                    : section.text.slice(0, 160) + "..."}
+                </p>
+                <button
+                  onClick={() => setExpanded(expanded === i ? null : i)}
+                  className="mt-4 text-[var(--brand-rose)] font-medium hover:underline"
+                >
+                  {expanded === i ? "Zwiń" : "Czytaj więcej"}
+                </button>
               </div>
-            )}
-
-            <div className="p-6 md:w-2/3">
-              <h3 className="text-2xl font-bold text-[var(--brand-green)] mb-3">
-                <span className="text-3xl text-[var(--brand-rose)] ">
-                  {section.icon}
-                </span>{" "}
-                {section.year}
-              </h3>
-              <p className="text-[var(--brand-green)] text-lg leading-relaxed">
-                {expanded === i
-                  ? section.text
-                  : section.text.slice(0, 160) + "..."}
-              </p>
-              <button
-                onClick={() => setExpanded(expanded === i ? null : i)}
-                className="mt-4 text-[var(--brand-rose)] font-medium hover:underline"
-              >
-                {expanded === i ? "Zwiń" : "Czytaj więcej"}
-              </button>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

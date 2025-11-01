@@ -9,6 +9,8 @@
   --foreground: #214424;
   --footer-background: #214424;
   --footer-foreground: #F6F2EE;
+  --hover-text: #214424;
+  --background-grid: #F6F2EE;
 
   --brand-green: #214424;
   --brand-rose: #D96689;
@@ -24,6 +26,8 @@ html.dark {
   --foreground: #ededed;
   --footer-background: #FFFFFF1A;
   --footer-foreground: #ededed;
+  --hover-text: #0a0a0a;
+  --background-grid: rgba(255, 255, 255, 0.08);
 
   --brand-green: #dfe7df;       
   --brand-rose:  #f0a8bf;
@@ -91,8 +95,8 @@ html.dark {
 @layer utilities {
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+      linear-gradient(to right, var(--background-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--background-grid) 1px, transparent 1px);
     background-size: 28px 28px;
   }
   .bg-radial {

@@ -47,7 +47,7 @@ export default function TestimonialsSection() {
     <section className="py-20 bg-[var(--brand-beige)] overflow-hidden relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 hidden dark:block bg-grid opacity-40"
+        className="pointer-events-none absolute inset-0 bg-grid opacity-40"
       />
       <div className="max-w-4xl mx-auto px-6">
         <motion.h2
