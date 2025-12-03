@@ -1,11 +1,9 @@
 import axios, { AxiosError } from "axios";
 import { 
   StrapiListResponse,
-  StrapiSingleResponse,
   Post,
   Service,
   Testimonial,
-  Message,
   MessageData,
 } from "@/lib/types";
 
@@ -23,7 +21,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  // timeout: 45000,
+  timeout: 15000,
 });
 
 function normalizeAxiosError(err: unknown): Error {
@@ -99,16 +97,28 @@ export async function getTestimonials(): Promise<Testimonial[]> {
 }
 
 // Message sending
-export async function sendMessage(payload: MessageData): Promise<boolean> {
+export async function sendMessage(payload: MessageData): Promise<boolean> { 
   try {
-    const res = await api.post<StrapiSingleResponse<Message>>(`/api/messages`, { data: {
-    name: payload.name,
-    email: payload.email,
-    message: payload.message,
-  },
-});
-    // console.log(JSON.stringify({ data: payload }, null, 2));
-    return Boolean(res.data.data);
+    const res = await api.post(`/api/messages`, { data: {
+        name: payload.name,
+        email: payload.email,
+        message: payload.message,
+      },
+    });
+
+    // console.log("sendMessage response:", res.data);
+
+    const customSuccess = !!(res.data && (res.data as { ok?: boolean }).ok === true);
+    
+    const strapiSuccess = res.data !== null && typeof res.data === "object" && (res.data as { data?: unknown }).data != null;
+
+    if (customSuccess || strapiSuccess) {
+        return true;
+    } else {
+        throw new Error(
+            "Serwer odpowiedział poprawnie, ale odpowiedź była pusta."
+        );
+    }
   } catch (error) {
     throw normalizeAxiosError(error);
   }

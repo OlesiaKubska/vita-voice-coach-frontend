@@ -44,28 +44,27 @@ export default function ContactForm() {
       };
 
       try {
-        const created = await sendMessage(payload);
-        if (created) {
-          setFormStatus("success");
-          resetForm();
-          setTimeout(() => alertRef.current?.focus(), 0);
-        } else {
-          throw new Error(
-            "Serwer odpowiedział, ale wiadomość nie została przetworzona."
-          );
-        }
+        await sendMessage(payload);
+
+        setFormStatus("success");
+        resetForm();
+        setTimeout(() => alertRef.current?.focus(), 0);
       } catch (err: unknown) {
+        // console.error("Cały błąd przechwycony:", err);
         let errorMessage = "Nie udało się wysłać wiadomości. Spróbuj ponownie.";
 
         if (isAxiosError(err)) {
           const status = err.response?.status;
-          if (status === 429)
+          if (status === 429) {
             errorMessage = "Zbyt wiele prób. Spróbuj ponownie za chwilę.";
-          else if (status === 413) errorMessage = "Wiadomość jest zbyt duża.";
-          else if (status && status >= 500)
+          } else if (status === 413) {
+            errorMessage = "Wiadomość jest zbyt duża.";
+          } else if (status && status >= 500) {
             errorMessage = "Błąd serwera. Spróbuj ponownie później.";
-          else errorMessage = err.message || errorMessage;
-        } else if (err instanceof Error) {
+          } else if (err.message) {
+            errorMessage = err.message;
+          }
+        } else if (err instanceof Error && err.message) {
           errorMessage = err.message;
         } else if (typeof err === "string") {
           errorMessage = err;
