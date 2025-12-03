@@ -1,36 +1,227 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 Vita Voice - Frontend (Next.js)
 
-## Getting Started
+Modern, responsive frontend application for **Vita Voice**, built with **Next.js + TypeScript**, styled with **TailwindCSS**, animated with **Framer Motion**, and integrated with a **Strapi backend**.
 
-First, run the development server:
+---
+## 🌐 Live URLs
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Frontend Website:** https://vitavoice.pl
+- **Backend API:** https://vita-voice-backend.onrender.com
+- **CMS Admin (private):** Not public
+
+---
+
+## ✨ Features
+
+✔️🎨 Elegant, responsive, accessible UI
+
+✔️📝 Blog with dynamic routing
+
+✔️🧾 Rich article content rendering
+
+✔️🛍️ Services catalog
+
+✔️⭐ Testimonials section
+
+✔️📬 Contact form with email notifications
+
+✔️🛡️ Frontend form validation (Formik + Yup)
+
+✔️🧩 Modular component architecture
+
+✔️🧾 SEO-friendly metadata and routing
+
+✔️🌗 Light/Dark visual theme support (custom)
+
+✔️🔥 Smooth animations with Framer Motion
+
+---
+
+## 🧰 Tech Stack
+
+- **Framework**	Next.js 14 (App Router)
+- **Language**	TypeScript
+- **Styling**	TailwindCSS, Custom CSS Variables
+- **Animations**	Framer Motion
+- **Forms**	Formik + Yup
+- **HTTP**	Axios
+- **Backend**	Strapi CMS
+- **Deployment**	Vercel
+- **Node**	18.x
+
+---
+
+## 📦 Project Structure
+```
+/public
+/src
+  /app
+    (pages, layouts, routing, globals.css)
+  /components
+    (UI components)
+  /lib
+    (api.ts, types.ts, utils.ts, filters.ts)
+  ...
+.env
+next.config.js
+tailwind.config.ts
+package.json
+  ...
+```
+---
+
+## ⚙️ Environment Variables
+
+Create `.env` in the project root:
+```
+NEXT_PUBLIC_API_URL=https://vita-voice-backend.onrender.com
+
+# Optional
+BOT_URL=
+BOT_API_TOKEN=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+For development:
+```
+cp .env.example .env
+```
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started (Local)
+1. Clone the repository
+```
+git clone https://github.com/OlesiaKubska/vita-voice-coach-frontend.git
+cd vita-voice-coach-frontend
+```
+2. Install dependencies
+```
+npm install
+```
+3. Create environment file
+```
+cp .env.example .env
+```
+4. Start development server
+```
+npm run dev
+```
+5. Open the app
+```
+http://localhost:3000
+```
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📡 API Integration
 
-## Learn More
+The app uses a typed Axios client (`src/lib/api.ts`).
 
-To learn more about Next.js, take a look at the following resources:
+Example request:
+```
+const posts = await getPosts();
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Example response:
+```
+[
+  {
+    "id": 1,
+    "title": "Article title",
+    "slug": "article-title",
+    "content": "...",
+    "publishedAt": "2023-01-01T00:00:00"
+  }
+]
+```
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✉️ Contact Form Flow
 
-## Deploy on Vercel
+- Validated with Yup
+- Submits to /api/messages
+- Saved in CMS
+- Email notification sent via SMTP
+- Accessible status alerts
+**Success example:**
+```
+{ "ok": true, "id": 101 }
+```
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧪 Scripts
+```
+npm run dev        # Start development
+npm run build      # Build for production
+npm run start      # Start production
+npm run lint       # Run ESLint
+```
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛡️ Performance & Accessibility
+
+- Core Web Vitals optimized
+- Lazy loaded content
+- GPU accelerated animations
+- Semantic HTML
+- ARIA accessibility attributes
+- Light/dark contrast compliant
+
+---
+
+## 📱 Responsiveness
+
+Fully optimized for:
+- Desktop
+- Tablet
+- Mobile
+- High-DPI screens
+
+---
+
+## 🚢 Deployment
+Hosted on Vercel
+
+**Build:**
+```
+npm run build
+```
+
+**Start:**
+```
+npm run start
+```
+
+Environment variables must be configured in Vercel UI.
+
+---
+
+## 📈 Future Improvements
+
+✔️🧵 Contact form rate-limiting
+
+✔️🧪 Unit tests (Vitest / React Testing Library)
+
+✔️🌍 i18n language support
+
+✔️🚀 Static generation of blog
+
+✔️🔐 Auth (login portal)
+
+✔️💽 Client cache & offline mode
+
+---
+
+## 👩‍💻 Author
+
+**Olesia Kubska**
+Full-Stack Developer
+
+🌐 https://vitavoice.pl
+
+📧 info@vitavoice.pl
+
+---
+
+## 📄 License
+
+Private.
+Unauthorized use, distribution, or modification is prohibited.
